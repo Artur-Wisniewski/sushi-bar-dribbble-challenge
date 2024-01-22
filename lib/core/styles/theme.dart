@@ -42,9 +42,9 @@ final mainTheme = ThemeData(
       fontWeight: FontWeight.w700,
     ),
     titleLarge: const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w500,
-      color: Colors.black,
+      fontSize: 22,
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
     ),
     displaySmall: const TextStyle(
       fontSize: 36,
@@ -57,9 +57,9 @@ final mainTheme = ThemeData(
       fontWeight: FontWeight.w600,
     ),
     labelLarge: const TextStyle(
-      fontSize: 12,
-      color: Colors.grey,
-      fontWeight: FontWeight.w400,
+      fontSize: 18,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
     ),
   ),
 );
