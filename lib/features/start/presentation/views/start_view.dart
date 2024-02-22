@@ -1,16 +1,16 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/rive_animations_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/models/rive_animations/noodles_animation.dart';
 import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/animated_fade_button.dart';
-import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/animated_title_japanese.dart';
+import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:rive/rive.dart';
 
-import '../../../../core/constants/images_paths.dart';
-import '../widgets/animated_title_english.dart';
-
 class StartView extends StatefulWidget {
-  const StartView({super.key});
+  const StartView({super.key, required this.image});
+
+  final AssetImage image;
 
   @override
   State<StartView> createState() => _StartViewState();
@@ -23,9 +23,9 @@ class _StartViewState extends State<StartView> {
 
   double get noodleAnimationYOffset => MediaQuery.of(context).size.height * -0.1;
 
-  double get signHeight => 84;
+  double get signColumnHeight => MediaQuery.of(context).size.height * 0.67 - 60 - 32;
 
-  double get signColumnHeight => signHeight * 5 + 5 * 20;
+  double get signColumnYOffset => MediaQuery.of(context).size.height * 0.30;
 
   Duration get englishTitleDelay => 500.ms;
 
@@ -34,14 +34,27 @@ class _StartViewState extends State<StartView> {
   Duration get buttonDelay => japaneseTitleDelay + 500.ms;
 
   @override
+  void initState() {
+    loadImage(ImagePaths.wavesBackground);
+    super.initState();
+  }
+
+  Future<void> loadImage(String imageUrl) async {
+    try {
+      await precacheImage(AssetImage(imageUrl), context);
+    } catch (e) {}
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          color: Colors.white,
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage(ImagePaths.wavesBackground),
+            image: widget.image,
           ),
         ),
         child: Stack(
@@ -58,30 +71,22 @@ class _StartViewState extends State<StartView> {
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.topLeft,
                   onInit: (_) => setState(() {}),
-                ),
-              ),
-            ),
-            Positioned(
-              right: 170,
-              top: 240,
-              child: SizedBox(
-                height: signColumnHeight + 5,
-                child: AnimatedTitleEnglish(
-                  delay: 500.ms,
-                ),
+                ).animate().fadeIn(duration: 500.ms, delay: 200.ms).slideY(
+                      begin: 0.03,
+                      end: 0,
+                      duration: 500.ms,
+                      delay: 200.ms,
+                    ),
               ),
             ),
             Positioned(
               right: 50,
-              top: 245,
-              child: TitleJapanese(
-                height: signColumnHeight,
-                startDelay: 1000.ms,
-              ),
-            ),
+              top: signColumnYOffset,
+              child: MainTitle(height: signColumnHeight),
+            )
           ],
         ),
-      ),
+      ).animate().fadeIn(duration: 300.ms),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: AnimatedFadeButton(delay: buttonDelay),
