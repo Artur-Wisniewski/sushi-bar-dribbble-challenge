@@ -22,6 +22,7 @@ dependencies:
   gap: any
   rive: ^0.12.4
   auto_size_text: ^3.0.0
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -30,8 +31,6 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
-
   uses-material-design: true
 
   assets:

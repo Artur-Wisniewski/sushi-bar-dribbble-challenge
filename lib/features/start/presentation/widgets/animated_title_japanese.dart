@@ -13,19 +13,23 @@ class TitleJapanese extends StatelessWidget {
 
   final Duration delay;
 
-  Duration get fadeInDuration => 300.ms;
+  Duration get fadeInDuration => 400.ms;
 
-  Duration get slideDuration => 150.ms;
+  Duration get slideDuration => 500.ms;
+
+  Duration get delayBetweenSigns => 200.ms;
 
   Duration get firstSignDelay => delay;
 
-  Duration get secondSignDelay => delay + 100.ms;
+  Duration get secondSignDelay => delay + delayBetweenSigns;
 
-  Duration get thirdSignDelay => secondSignDelay + 100.ms;
+  Duration get thirdSignDelay => secondSignDelay + delayBetweenSigns;
 
-  Duration get fourthSignDelay => thirdSignDelay + 100.ms;
+  Duration get fourthSignDelay => thirdSignDelay + delayBetweenSigns;
 
-  Duration get fifthSignDelay => fourthSignDelay + 100.ms;
+  Duration get fifthSignDelay => fourthSignDelay + delayBetweenSigns;
+
+  // TODO do it better with group intervals animation
 
   @override
   Widget build(BuildContext context) {

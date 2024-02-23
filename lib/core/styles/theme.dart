@@ -6,6 +6,11 @@ final mainTheme = ThemeData(
   fontFamily: 'NotoSansJP',
   scaffoldBackgroundColor: AppColors.scaffoldBackground,
   primaryColor: AppColors.primary,
+  colorScheme: const ColorScheme.light(
+    primary: AppColors.primary,
+    secondary: AppColors.secondary,
+    onBackground: AppColors.grey,
+  ),
   textTheme: const TextTheme().copyWith(
     displayLarge: const TextStyle(
       fontSize: 48,
