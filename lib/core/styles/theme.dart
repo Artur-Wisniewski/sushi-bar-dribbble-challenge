@@ -11,6 +11,17 @@ final mainTheme = ThemeData(
     secondary: AppColors.secondary,
     onBackground: AppColors.grey,
   ),
+  badgeTheme: const BadgeThemeData(
+    backgroundColor: AppColors.scaffoldBackground,
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    largeSize: 32,
+    textColor: AppColors.secondary,
+    textStyle: TextStyle(
+      color: AppColors.secondary,
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+    ),
+  ),
   textTheme: const TextTheme().copyWith(
     displayLarge: const TextStyle(
       fontSize: 48,
@@ -31,6 +42,7 @@ final mainTheme = ThemeData(
     titleSmall: const TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 15,
+      color: Colors.white,
     ),
     bodySmall: const TextStyle(
       fontSize: 14,
@@ -39,6 +51,12 @@ final mainTheme = ThemeData(
     headlineMedium: const TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+    headlineSmall: const TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
     ),
     titleMedium: const TextStyle(
       color: Colors.black,
