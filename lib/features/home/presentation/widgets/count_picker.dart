@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class CountPicker extends StatefulWidget {
-  const CountPicker({super.key, required this.price});
+  const CountPicker(
+      {super.key, required this.price, required this.onAdd, required this.onRemove, required this.counter});
 
   final double price;
+  final VoidCallback onAdd;
+  final VoidCallback onRemove;
+  final ValueNotifier<int> counter;
 
   @override
   State<CountPicker> createState() => _CountPickerState();
 }
 
 class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin {
-  final ValueNotifier<int> counter = ValueNotifier(0);
   late final AnimationController scaleController = AnimationController(vsync: this);
 
-  bool get isCounterVisible => counter.value > 0;
+  bool get isCounterVisible => widget.counter.value > 0;
 
   Color get backgroundColor =>
       isCounterVisible ? Theme.of(context).scaffoldBackgroundColor : Theme.of(context).colorScheme.secondary;
@@ -44,13 +47,13 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (counter.value == 0) {
-          counter.value++;
+        if (widget.counter.value == 0) {
+          widget.onAdd();
           scaleController.forward();
         }
       },
       child: AnimatedBuilder(
-        animation: counter,
+        animation: widget.counter,
         builder: (context, _) {
           return AnimatedContainer(
             height: 40,
@@ -61,12 +64,12 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
             ),
             duration: 300.ms,
             child: Row(
-              mainAxisAlignment: counter.value > 0 ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
+              mainAxisAlignment: widget.counter.value > 0 ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
               children: [
                 if (isCounterVisible)
                   _buildButton(
                     onPressed: () {
-                      counter.value--;
+                      widget.onRemove();
                     },
                     icon: Icons.remove_rounded,
                   )
@@ -83,19 +86,19 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
                       ),
                 TextSwapper(
                   key: key,
-                  text: counter.value > 0 ? counter.value.toString() : '\$${widget.price.toStringAsFixed(0)}',
+                  text: widget.counter.value > 0
+                      ? widget.counter.value.toString()
+                      : '\$${widget.price.toStringAsFixed(0)}',
                   durationOut: 150.ms,
                   durationIn: 150.ms,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: isCounterVisible
-                            ? Theme.of(context).colorScheme.secondary
-                            : Theme.of(context).hintColor,
+                        color: isCounterVisible ? Theme.of(context).colorScheme.secondary : Theme.of(context).hintColor,
                       ),
                 ),
                 if (isCounterVisible)
                   _buildButton(
                     onPressed: () {
-                      counter.value++;
+                      widget.onAdd();
                     },
                     icon: Icons.add_rounded,
                   )

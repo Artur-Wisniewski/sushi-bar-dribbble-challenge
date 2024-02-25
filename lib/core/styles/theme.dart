@@ -75,8 +75,13 @@ final mainTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     labelMedium: const TextStyle(
-      fontSize: 14,
+      fontSize: 12,
       color: Colors.grey,
+      fontWeight: FontWeight.w600,
+    ),
+    labelSmall: const TextStyle(
+      fontSize: 10,
+      color: Colors.white,
       fontWeight: FontWeight.w600,
     ),
     labelLarge: const TextStyle(

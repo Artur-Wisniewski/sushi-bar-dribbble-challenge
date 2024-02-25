@@ -1,14 +1,17 @@
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/dish.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/manager/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/count_picker.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class DishCard extends StatelessWidget {
-  const DishCard({super.key, required this.dish, required this.scrollController});
+  DishCard({super.key, required this.dish, required this.scrollController});
 
   final DishEntity dish;
   final ScrollController scrollController;
+  final counter = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,15 @@ class DishCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: CountPicker(price: dish.price),
+              child: BlocListener<ShoppingCartCubit, ShoppingCartState>(
+                listener: (context, state) => counter.value = state.order[dish] ?? 0,
+                child: CountPicker(
+                  counter: counter,
+                  price: dish.price,
+                  onAdd: () => BlocProvider.of<ShoppingCartCubit>(context).addDish(dish),
+                  onRemove: () => BlocProvider.of<ShoppingCartCubit>(context).removeDish(dish),
+                ),
+              ),
             )
           ],
         ),

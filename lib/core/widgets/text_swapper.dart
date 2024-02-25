@@ -48,7 +48,8 @@ class _TextSwapperState extends State<TextSwapper> with TickerProviderStateMixin
     if (widget.text != oldWidget.text) {
       _controller.forward();
       _controller2.forward();
-      Future.delayed(widget.durationOut, () {
+      //TODO this time is a workaround
+      Future.delayed(140.ms, () {
         setState(() {
           currentText = widget.text;
         });
