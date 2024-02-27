@@ -5,7 +5,7 @@ import 'package:dribbble_sushi_bar_challenge/core/constants/svg_images_paths.dar
 import 'package:dribbble_sushi_bar_challenge/core/widgets/overlay_animated_counter_badge.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/widgets/bottom_bar_item.dart';
-import 'package:dribbble_sushi_bar_challenge/features/home/presentation/manager/shopping_cart_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';

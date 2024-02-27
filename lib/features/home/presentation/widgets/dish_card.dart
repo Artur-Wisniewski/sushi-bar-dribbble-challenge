@@ -1,5 +1,5 @@
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/dish.dart';
-import 'package:dribbble_sushi_bar_challenge/features/home/presentation/manager/shopping_cart_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/count_picker.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +7,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class DishCard extends StatelessWidget {
-  DishCard({super.key, required this.dish, required this.scrollController});
+  const DishCard({
+    super.key,
+    required this.dish,
+    required this.scrollController,
+    required this.cardDishWidth,
+  });
 
   final DishEntity dish;
   final ScrollController scrollController;
+  final double cardDishWidth;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
-        width: MediaQuery.of(context).size.width * 2 / 3,
+        width: cardDishWidth,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(20),

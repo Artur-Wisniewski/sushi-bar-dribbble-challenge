@@ -1,5 +1,5 @@
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
-import 'package:dribbble_sushi_bar_challenge/features/home/presentation/manager/shopping_cart_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
