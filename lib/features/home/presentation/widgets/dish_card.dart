@@ -11,7 +11,6 @@ class DishCard extends StatelessWidget {
 
   final DishEntity dish;
   final ScrollController scrollController;
-  final counter = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +74,15 @@ class DishCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: BlocListener<ShoppingCartCubit, ShoppingCartState>(
-                listener: (context, state) => counter.value = state.order[dish] ?? 0,
-                child: CountPicker(
-                  counter: counter,
-                  price: dish.price,
-                  onAdd: () => BlocProvider.of<ShoppingCartCubit>(context).addDish(dish),
-                  onRemove: () => BlocProvider.of<ShoppingCartCubit>(context).removeDish(dish),
-                ),
+              child: BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
+                builder: (BuildContext context, ShoppingCartState state) {
+                  return CountPicker(
+                    counter: state.order[dish] ?? 0,
+                    price: dish.price,
+                    onAdd: () => BlocProvider.of<ShoppingCartCubit>(context).addDish(dish),
+                    onRemove: () => BlocProvider.of<ShoppingCartCubit>(context).removeDish(dish),
+                  );
+                },
               ),
             )
           ],
