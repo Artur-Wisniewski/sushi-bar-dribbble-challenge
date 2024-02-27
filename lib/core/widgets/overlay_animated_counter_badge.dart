@@ -49,8 +49,8 @@ class _OverlayAnimatedBadgeState extends State<OverlayAnimatedBadge> with Ticker
       children: [
         widget.child,
         Positioned(
-          left: 8,
-          top: -10,
+          right: 5,
+          top: 3,
           child: AnimatedOpacity(
             opacity: showBadge ? 1 : 0,
             duration: 300.ms,

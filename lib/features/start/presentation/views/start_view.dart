@@ -6,9 +6,10 @@ import 'package:dribbble_sushi_bar_challenge/core/models/rive_animations/noodles
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/animated_fade_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/title.dart';
-import 'package:dribbble_sushi_bar_challenge/setup/routes.dart';
+import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
 
 class StartView extends StatefulWidget {
@@ -119,7 +120,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
               _titleController.addStatusListener((status) {
                 if (status == AnimationStatus.completed) {
                   Future.delayed(400.ms, () {
-                    Navigator.of(context).pushNamed(Routes.home);
+                    context.go(RoutesPaths.home);
                   });
                 }
               });

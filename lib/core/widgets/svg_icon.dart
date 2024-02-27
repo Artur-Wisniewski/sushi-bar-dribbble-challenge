@@ -6,12 +6,12 @@ class SvgIcon extends StatelessWidget {
     this.path, {
     super.key,
     required this.size,
-    this.isHighlighted = false,
+    required this.color,
   });
 
   final double size;
   final String path;
-  final bool isHighlighted;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,9 @@ class SvgIcon extends StatelessWidget {
       height: size,
       width: size,
       colorFilter: ColorFilter.mode(
-        isHighlighted
-            ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.onBackground,
+        color,
         BlendMode.srcIn,
-      )
+      ),
     );
   }
 }
