@@ -6,9 +6,11 @@ class AnimatedAppBar extends StatelessWidget {
   const AnimatedAppBar({
     super.key,
     required this.appBarPlayDuration,
+    required this.appBarAnimationController,
   });
 
   final Duration appBarPlayDuration;
+  final AnimationController appBarAnimationController;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,9 @@ class AnimatedAppBar extends StatelessWidget {
             )
           ],
         )
-            .animate()
+            .animate(
+              controller: appBarAnimationController,
+            )
             .fadeIn(
               duration: appBarPlayDuration,
             )
@@ -54,16 +58,19 @@ class AnimatedAppBar extends StatelessWidget {
             Icons.search,
             color: Theme.of(context).colorScheme.onPrimary,
           ),
-        ) .animate()
-            .fadeIn(
-          duration: appBarPlayDuration,
         )
+            .animate(
+              controller: appBarAnimationController,
+            )
+            .fadeIn(
+              duration: appBarPlayDuration,
+            )
             .slideX(
-          duration: appBarPlayDuration,
-          begin: 0.3,
-          end: 0,
-          curve: Curves.easeInOutSine,
-        ),
+              duration: appBarPlayDuration,
+              begin: 0.3,
+              end: 0,
+              curve: Curves.easeInOutSine,
+            ),
       ],
     );
   }

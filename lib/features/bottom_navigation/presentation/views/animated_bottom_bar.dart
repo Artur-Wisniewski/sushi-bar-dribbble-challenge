@@ -20,8 +20,6 @@ class AnimatedBottomBar extends StatefulWidget {
 }
 
 class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
-  final BottomBarNavigationCubit bottomBarNavigationCubit = BottomBarNavigationCubit();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +31,6 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
             borderRadius: BorderRadii.circular,
           ),
           child: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
-            bloc: bottomBarNavigationCubit,
             builder: (context, bottomBarState) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -42,7 +39,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
                     isActive: bottomBarState.currentItem == BottomBarItems.home,
                     iconPath: SvgImagesPaths.bowlChopsticks,
                     onTap: () {
-                      bottomBarNavigationCubit.changeItem(BottomBarItems.home);
+                      context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.home);
                       context.go(RoutesPaths.home);
                     },
                   ),
@@ -58,8 +55,8 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
                           isActive: bottomBarState.currentItem == BottomBarItems.cart,
                           iconPath: SvgImagesPaths.cart,
                           onTap: () {
-                            bottomBarNavigationCubit.changeItem(BottomBarItems.cart);
-                            context.go(RoutesPaths.cart);
+                            context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.cart);
+                            Future.delayed(750.ms, () => context.go(RoutesPaths.cart));
                           },
                         ),
                       );

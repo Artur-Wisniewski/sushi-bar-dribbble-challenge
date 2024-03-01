@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'core/styles/theme.dart';
+import 'features/bottom_navigation/manager/bottom_bar_navigation_cubit.dart';
 
 class StarterApp extends StatefulWidget {
   const StarterApp({super.key});
@@ -24,8 +25,11 @@ class _StarterAppState extends State<StarterApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ShoppingCartCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ShoppingCartCubit()),
+        BlocProvider(create: (_) => BottomBarNavigationCubit()),
+      ],
       child: MaterialApp.router(
         theme: mainTheme,
         themeMode: ThemeMode.light,
