@@ -10,6 +10,7 @@ final mainTheme = ThemeData(
     primary: AppColors.primary,
     secondary: AppColors.secondary,
     onBackground: AppColors.grey,
+    onSecondary: AppColors.grey,
   ),
   badgeTheme: const BadgeThemeData(
     backgroundColor: AppColors.scaffoldBackground,
