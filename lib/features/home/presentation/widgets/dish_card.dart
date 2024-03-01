@@ -1,6 +1,6 @@
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/dish.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
-import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/count_picker.dart';
+import 'package:dribbble_sushi_bar_challenge/core/widgets/count_picker.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

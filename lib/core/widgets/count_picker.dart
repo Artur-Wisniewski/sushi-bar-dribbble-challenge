@@ -9,12 +9,28 @@ class CountPicker extends StatefulWidget {
     required this.onAdd,
     required this.onRemove,
     required this.counter,
+    this.buttonScale = 1.0,
+    this.heightScale = 1.0,
+    this.isCompact = false,
   });
+
+  const CountPicker.small({
+    super.key,
+    required this.price,
+    required this.onAdd,
+    required this.onRemove,
+    required this.counter,
+  })  : buttonScale = 0.7,
+        heightScale = 0.86,
+        isCompact = true;
 
   final double price;
   final VoidCallback onAdd;
   final VoidCallback onRemove;
   final int counter;
+  final double buttonScale;
+  final double heightScale;
+  final bool isCompact;
 
   @override
   State<CountPicker> createState() => _CountPickerState();
@@ -70,7 +86,7 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
         animation: counter,
         builder: (context, _) {
           return AnimatedContainer(
-            height: 40,
+            height: widget.heightScale * 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: backgroundColor,
@@ -78,6 +94,7 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
             ),
             duration: 300.ms,
             child: Row(
+              mainAxisSize: widget.isCompact ? MainAxisSize.min: MainAxisSize.max,
               mainAxisAlignment: counter.value > 0 ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
               children: [
                 if (isCounterVisible)
@@ -153,9 +170,11 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
       padding: const EdgeInsets.all(0.0),
       color: Theme.of(context).scaffoldBackgroundColor,
       onPressed: onPressed,
+      iconSize: 28 * widget.buttonScale,
+      visualDensity: widget.buttonScale < 1.0 ? VisualDensity.compact : VisualDensity.standard,
       icon: Container(
-        height: 30,
-        width: 30,
+        height: 30 * widget.buttonScale,
+        width: 30 * widget.buttonScale,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(20),
