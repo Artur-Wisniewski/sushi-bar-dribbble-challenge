@@ -1,39 +1,68 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class ServeOptionSwitcher extends StatefulWidget {
-  const ServeOptionSwitcher({super.key});
+  const ServeOptionSwitcher({
+    super.key,
+    required this.onSwitch,
+    required this.initialOrderType,
+  });
+
+  final Function(OrderType orderType) onSwitch;
+  final OrderType initialOrderType;
 
   @override
   State<ServeOptionSwitcher> createState() => _ServeOptionSwitcherState();
 }
 
-class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> {
+class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTickerProviderStateMixin {
   //TODO swap all text with l10n strings
 
-  bool isDelivery = true;
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: widget.initialOrderType == OrderType.delivery ? 0 : 1,
+    );
+    _tabController.addListener(() {
+      if (_tabController.index == 0) {
+        widget.onSwitch(OrderType.delivery);
+      } else {
+        widget.onSwitch(OrderType.table);
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: SegmentedTabControl(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        indicatorColor: Theme.of(context).colorScheme.primary,
-        tabTextColor: Theme.of(context).colorScheme.onSecondary,
-        selectedTabTextColor: Theme.of(context).colorScheme.secondary,
-          textStyle: Theme.of(context).textTheme.bodyMedium,
-        indicatorPadding: const EdgeInsets.all(4),
-        tabs: const [
-          SegmentTab(
-            label: "Order Delivery",
-          ),
-          SegmentTab(
-            label: "In the restaurant",
-          ),
-        ],
-      ),
+    return SegmentedTabControl(
+      controller: _tabController,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      indicatorColor: Theme.of(context).colorScheme.primary,
+      tabTextColor: Theme.of(context).colorScheme.onSecondary,
+      selectedTabTextColor: Theme.of(context).colorScheme.secondary,
+      textStyle: Theme.of(context).textTheme.bodyMedium,
+      indicatorPadding: const EdgeInsets.all(4),
+      tabs: const [
+        SegmentTab(
+          label: "Order Delivery",
+        ),
+        SegmentTab(
+          label: "In the restaurant",
+        ),
+      ],
     )
         .animate()
         .slideY(

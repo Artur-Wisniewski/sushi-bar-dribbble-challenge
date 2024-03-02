@@ -50,7 +50,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
                   BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
                     builder: (context, state) {
                       return OverlayAnimatedBadge(
-                        counter: state.order.values.fold(0, (prev, element) => prev + element),
+                        counter: state.totalOrderedItems,
                         child: AnimatedBottomBarItem(
                           isActive: bottomBarState.currentItem == BottomBarItems.cart,
                           iconPath: SvgImagesPaths.cart,

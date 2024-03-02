@@ -94,7 +94,7 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
             ),
             duration: 300.ms,
             child: Row(
-              mainAxisSize: widget.isCompact ? MainAxisSize.min: MainAxisSize.max,
+              mainAxisSize: widget.isCompact ? MainAxisSize.min : MainAxisSize.max,
               mainAxisAlignment: counter.value > 0 ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
               children: [
                 if (isCounterVisible)
@@ -118,8 +118,6 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
                 TextSwapper(
                   key: key,
                   text: counter.value > 0 ? counter.value.toString() : '\$${widget.price.toStringAsFixed(0)}',
-                  durationOut: 150.ms,
-                  durationIn: 150.ms,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: isCounterVisible ? Theme.of(context).colorScheme.secondary : Theme.of(context).hintColor,
                       ),

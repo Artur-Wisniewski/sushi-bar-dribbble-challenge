@@ -6,8 +6,8 @@ class TextSwapper extends StatefulWidget {
     super.key,
     required this.text,
     this.style,
-    required this.durationOut,
-    required this.durationIn,
+    this.durationOut = const Duration(milliseconds: 150),
+    this.durationIn = const Duration(milliseconds: 150),
   });
 
   final String text;

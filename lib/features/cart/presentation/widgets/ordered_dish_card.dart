@@ -1,6 +1,9 @@
 import 'package:dribbble_sushi_bar_challenge/core/widgets/count_picker.dart';
+import 'package:dribbble_sushi_bar_challenge/core/widgets/text_swapper.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/dish.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class OrderedDishCard extends StatelessWidget {
@@ -51,20 +54,17 @@ class OrderedDishCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: Text(
-                        '\$${(dish.price * quantity).ceil().toString()}',
+                      child: TextSwapper(
+                        text: '\$${(dish.price * quantity).ceil().toString()}',
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                               color: Theme.of(context).colorScheme.onSecondaryContainer,
                             ),
                       ),
                     ),
                     CountPicker.small(
-                      key: ValueKey<int>(quantity),
                       counter: quantity,
-                      onAdd: () {},
-                      onRemove: () {
-                        // if lower than 1, remove card item
-                      },
+                      onAdd: () => context.read<ShoppingCartCubit>().addDish(dish),
+                      onRemove: () => context.read<ShoppingCartCubit>().removeDish(dish),
                       price: dish.price,
                     ),
                   ],
