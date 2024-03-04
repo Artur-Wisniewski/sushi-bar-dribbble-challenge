@@ -87,26 +87,30 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
                       delay: 200.ms,
                     ),
               ),
-            ).animate(
-              autoPlay: false,
-              controller: _noodlesController,
-            ).slideX(
-              begin: 0,
-              end: -1,
-              duration: 900.ms,
-            ),
+            )
+                .animate(
+                  autoPlay: false,
+                  controller: _noodlesController,
+                )
+                .slideX(
+                  begin: 0,
+                  end: -1,
+                  duration: 900.ms,
+                ),
             Positioned(
               right: 50,
               top: signColumnYOffset,
               child: MainTitle(height: signColumnHeight),
-            ).animate(
-              autoPlay: false,
-              controller: _titleController
-            ).slideX(
-              begin: 0.00,
-              end: 3,
-              duration: 900.ms,
             )
+                .animate(
+                  autoPlay: false,
+                  controller: _titleController,
+                )
+                .slideX(
+                  begin: 0.00,
+                  end: 3,
+                  duration: 900.ms,
+                ),
           ],
         ),
       ).animate().fadeIn(duration: 300.ms),
@@ -117,13 +121,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
             onPressed: () {
               _titleController.forward();
               _noodlesController.forward();
-              _titleController.addStatusListener((status) {
-                if (status == AnimationStatus.completed) {
-                  Future.delayed(400.ms, () {
-                    context.go(RoutesPaths.home);
-                  });
-                }
-              });
+              Future.delayed(400.ms, () => context.go(RoutesPaths.home));
             }),
       ),
     );

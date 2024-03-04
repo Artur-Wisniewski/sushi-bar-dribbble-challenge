@@ -25,51 +25,63 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
     return Padding(
       padding: Paddings.mediumBottom,
       child: Container(
-          height: Sizes.bottomBarHeight,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadii.circular,
-          ),
-          child: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
-            builder: (context, bottomBarState) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  AnimatedBottomBarItem(
-                    isActive: bottomBarState.currentItem == BottomBarItems.home,
-                    iconPath: SvgImagesPaths.bowlChopsticks,
-                    onTap: () {
-                      context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.home);
-                      context.go(RoutesPaths.home);
-                    },
+        height: Sizes.bottomBarHeight,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: BorderRadii.circular,
+        ),
+        child: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
+          builder: (context, bottomBarState) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                AnimatedBottomBarItem(
+                  isActive: bottomBarState.currentItem == BottomBarItems.home,
+                  iconPath: SvgImagesPaths.bowlChopsticks,
+                  onTap: () {
+                    context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.home);
+                    Future.delayed(750.ms, () => context.go(RoutesPaths.home));
+                  },
+                ),
+                AnimatedBottomBarItem(
+                  isActive: bottomBarState.currentItem == BottomBarItems.other,
+                  iconPath: SvgImagesPaths.rhombusSplit,
+                ),
+                BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
+                  builder: (context, state) {
+                    return OverlayAnimatedBadge(
+                      counter: state.totalOrderedItems,
+                      child: AnimatedBottomBarItem(
+                        isActive: bottomBarState.currentItem == BottomBarItems.cart,
+                        iconPath: SvgImagesPaths.cart,
+                        onTap: () {
+                          context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.cart);
+                          Future.delayed(750.ms, () => context.go(RoutesPaths.cart));
+                        },
+                      ),
+                    );
+                  },
+                ),
+                AnimatedBottomBarItem(
+                  isActive: bottomBarState.currentItem == BottomBarItems.profile,
+                  iconPath: SvgImagesPaths.account,
+                ),
+              ]
+                  .animate(
+                    interval: 120.ms,
+                  )
+                  .fadeIn(
+                    duration: 450.ms,
+                  )
+                  .slideY(
+                    begin: 0.7,
+                    end: 0,
+                    duration: 300.ms,
                   ),
-                  AnimatedBottomBarItem(
-                    isActive: bottomBarState.currentItem == BottomBarItems.other,
-                    iconPath: SvgImagesPaths.rhombusSplit,
-                  ),
-                  BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
-                    builder: (context, state) {
-                      return OverlayAnimatedBadge(
-                        counter: state.totalOrderedItems,
-                        child: AnimatedBottomBarItem(
-                          isActive: bottomBarState.currentItem == BottomBarItems.cart,
-                          iconPath: SvgImagesPaths.cart,
-                          onTap: () {
-                            context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.cart);
-                            Future.delayed(750.ms, () => context.go(RoutesPaths.cart));
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  AnimatedBottomBarItem(
-                    isActive: bottomBarState.currentItem == BottomBarItems.profile,
-                    iconPath: SvgImagesPaths.account,
-                  ),
-                ].animate(interval: 80.ms).fadeIn(duration: 450.ms).slideY(begin: 1, end: 0, duration: 300.ms),
-              );
-            },
-          )),
+            );
+          },
+        ),
+      ),
     );
   }
 }

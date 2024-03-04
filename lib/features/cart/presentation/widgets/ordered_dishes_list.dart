@@ -20,6 +20,7 @@ class OrderedDishesList extends StatelessWidget {
       builder: (context, state) {
         return ListView(
           shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           children: List.generate(state.order.length, (index) {
             final dish = state.order.keys.elementAt(index);
             final quantity = state.order[dish]!;

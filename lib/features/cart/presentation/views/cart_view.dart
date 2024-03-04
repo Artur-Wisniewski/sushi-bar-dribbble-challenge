@@ -1,3 +1,4 @@
+import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/animated_order_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/ordered_dishes_list.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/serve_option_switcher.dart';
@@ -28,41 +29,58 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+    return BlocListener<BottomBarNavigationCubit, BottomBarNavigationState>(
+      listener: (context, state) {
+        if (state.currentItem != BottomBarItems.cart) {
+          _exitAnimationController.forward();
+        }
+      },
+      child: SafeArea(
         child: Column(
           children: [
             const Gap(16),
-            ServeOptionSwitcher(
-              onSwitch: (OrderType orderType) {
-                context.read<ShoppingCartCubit>().changeOrderType(orderType);
-              },
-              exitAnimationController: _exitAnimationController,
-              initialOrderType: context.read<ShoppingCartCubit>().state.orderType,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: ServeOptionSwitcher(
+                onSwitch: (OrderType orderType) {
+                  context.read<ShoppingCartCubit>().changeOrderType(orderType);
+                },
+                exitAnimationController: _exitAnimationController,
+                initialOrderType: context.read<ShoppingCartCubit>().state.orderType,
+              ),
             ),
             const Gap(32),
             Expanded(
-              child: OrderedDishesList(
-                animationDelay: 250.ms,
-                exitAnimationController: _exitAnimationController,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    child: OrderedDishesList(
+                      animationDelay: 250.ms,
+                      exitAnimationController: _exitAnimationController,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    width: MediaQuery.of(context).size.width,
+                    child: BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
+                      builder: (context, state) {
+                        return AnimatedOrderButton(
+                          totalCost: state.totalCost,
+                          animationDelay: calculateAnimatedOrderButtonDelay(2),
+                          orderType: state.orderType,
+                          exitAnimationController: _exitAnimationController,
+                          onTap: () {
+                            if (state.orderType == OrderType.table) {
+                              _exitAnimationController.forward();
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-            BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
-              builder: (context, state) {
-                return AnimatedOrderButton(
-                  totalCost: state.totalCost,
-                  animationDelay: calculateAnimatedOrderButtonDelay(2),
-                  orderType: state.orderType,
-                  onTap: () {
-                    if (state.orderType == OrderType.table) {
-                      _exitAnimationController.forward();
-                      // animate out
-                      // navigate to table booking
-                    }
-                  },
-                );
-              },
             ),
           ],
         ),

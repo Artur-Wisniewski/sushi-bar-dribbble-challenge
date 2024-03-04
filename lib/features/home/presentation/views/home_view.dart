@@ -43,6 +43,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   void dispose() {
     // TODO check all dispose methods in the app
+    // TODO check all paddings in the app
     animationOutController.dispose();
     appBarAnimationController.dispose();
     super.dispose();

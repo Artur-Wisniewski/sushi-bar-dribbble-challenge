@@ -13,12 +13,14 @@ class AnimatedOrderButton extends StatefulWidget {
     required this.animationDelay,
     required this.orderType,
     required this.onTap,
+    required this.exitAnimationController,
   });
 
   final Duration animationDelay;
   final double totalCost;
   final OrderType orderType;
   final VoidCallback onTap;
+  final AnimationController exitAnimationController;
 
   @override
   State<AnimatedOrderButton> createState() => _AnimatedOrderButtonState();
@@ -26,6 +28,16 @@ class AnimatedOrderButton extends StatefulWidget {
 
 class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerProviderStateMixin {
   late final AnimationController _entryAnimationController = AnimationController(vsync: this);
+
+  @override
+  void initState() {
+    widget.exitAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.forward) {
+        _entryAnimationController.reverse();
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +50,7 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
           alignment: Alignment.center,
           height: Sizes.bottomBarHeight,
           padding: Paddings.mediumAll,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadii.circular,
@@ -54,13 +67,13 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
             .scaleXY(
               begin: 0.5,
               end: 1,
-              duration: 1000.ms,
+              duration: 750.ms,
               curve: Curves.ease,
             )
             .slideY(
               begin: 1.23,
               end: 0,
-              duration: 1000.ms,
+              duration: 750.ms,
               curve: Curves.ease,
             ));
   }
