@@ -29,14 +29,15 @@ final router = GoRouter(
         return Scaffold(
           extendBody: true,
           body: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.scaffoldBackground,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(ImagePaths.wavesBackground),
-                ),
+            decoration: const BoxDecoration(
+              color: AppColors.scaffoldBackground,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(ImagePaths.wavesBackground),
               ),
-              child: child),
+            ),
+            child: child,
+          ),
           bottomNavigationBar: const AnimatedBottomBar(),
         );
       },
