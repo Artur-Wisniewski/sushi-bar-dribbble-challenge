@@ -24,41 +24,50 @@ class AnimatedOrderButton extends StatefulWidget {
   State<AnimatedOrderButton> createState() => _AnimatedOrderButtonState();
 }
 
-class _AnimatedOrderButtonState extends State<AnimatedOrderButton> {
-  bool isOrdering = true;
+class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerProviderStateMixin {
+  late final AnimationController _entryAnimationController = AnimationController(vsync: this);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        alignment: Alignment.center,
-        height: Sizes.bottomBarHeight,
-        padding: Paddings.mediumAll,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadii.circular,
-        ),
-        child: TextSwapper(
-          text: widget.orderType.isDelivery ? 'Order \$${widget.totalCost.toStringAsFixed(0)}' : 'Book a table',
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.secondary),
-        ),
-      )
-          .animate(
-            delay: widget.animationDelay,
-          )
-          .scaleXY(
-            begin: 0.5,
-            end: 1,
-            duration: 1000.ms,
-            curve: Curves.ease,
-          )
-          .slideY(
-            begin: 1.23,
-            end: 0,
-            duration: 1000.ms,
-            curve: Curves.ease,
+        onTap: () {
+          _entryAnimationController.reverse();
+          widget.onTap();
+        },
+        child: Container(
+          alignment: Alignment.center,
+          height: Sizes.bottomBarHeight,
+          padding: Paddings.mediumAll,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadii.circular,
           ),
-    );
+          child: TextSwapper(
+            text: widget.orderType.isDelivery ? 'Order \$${widget.totalCost.toStringAsFixed(0)}' : 'Book a table',
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.secondary),
+          ),
+        )
+            .animate(
+              controller: _entryAnimationController,
+              delay: widget.animationDelay,
+            )
+            .scaleXY(
+              begin: 0.5,
+              end: 1,
+              duration: 1000.ms,
+              curve: Curves.ease,
+            )
+            .slideY(
+              begin: 1.23,
+              end: 0,
+              duration: 1000.ms,
+              curve: Curves.ease,
+            ));
+  }
+
+  @override
+  dispose() {
+    _entryAnimationController.dispose();
+    super.dispose();
   }
 }

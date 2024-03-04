@@ -5,9 +5,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderedDishesList extends StatelessWidget {
-  const OrderedDishesList({super.key, required this.animationDelay});
+  const OrderedDishesList({
+    super.key,
+    required this.animationDelay,
+    required this.exitAnimationController,
+  });
 
   final Duration animationDelay;
+  final AnimationController exitAnimationController;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,10 @@ class OrderedDishesList extends StatelessWidget {
             final quantity = state.order[dish]!;
             return Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
-              child: OrderedDishCard(dish: dish, quantity: quantity),
+              child: OrderedDishCard(
+                dish: dish,
+                quantity: quantity,
+              ),
             );
           })
               .animate(
@@ -29,15 +37,29 @@ class OrderedDishesList extends StatelessWidget {
               )
               .fadeIn(
                 duration: 600.ms,
-                //curve: Curves.easeInOutBack,
+                curve: Curves.easeInOutSine,
               )
               .slideX(
                 begin: 0.05,
                 end: 0,
                 duration: 600.ms,
-                //curve: Curves.easeInOutBack,
+                curve: Curves.easeInOutSine,
               ),
-        );
+        )
+            .animate(
+              controller: exitAnimationController,
+              autoPlay: false,
+            )
+            .slideX(
+              begin: 0,
+              end: -0.1,
+              duration: 600.ms,
+              curve: Curves.easeInOutSine,
+            )
+            .fadeOut(
+              duration: 600.ms,
+              curve: Curves.easeInOutSine,
+            );
       },
     );
   }

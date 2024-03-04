@@ -7,11 +7,24 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class CartView extends StatelessWidget {
+class CartView extends StatefulWidget {
   const CartView({super.key});
 
+  @override
+  State<CartView> createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> with TickerProviderStateMixin {
   Duration calculateAnimatedOrderButtonDelay(int numberOfDifferentOrderedDishes) =>
       250.ms + (numberOfDifferentOrderedDishes > 0 ? ((150.ms * numberOfDifferentOrderedDishes.clamp(0, 3))) : 0.ms);
+
+  late final AnimationController _exitAnimationController = AnimationController(vsync: this);
+
+  @override
+  dispose() {
+    _exitAnimationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +38,29 @@ class CartView extends StatelessWidget {
               onSwitch: (OrderType orderType) {
                 context.read<ShoppingCartCubit>().changeOrderType(orderType);
               },
+              exitAnimationController: _exitAnimationController,
               initialOrderType: context.read<ShoppingCartCubit>().state.orderType,
             ),
             const Gap(32),
-            Expanded(child: OrderedDishesList(animationDelay: 250.ms)),
+            Expanded(
+              child: OrderedDishesList(
+                animationDelay: 250.ms,
+                exitAnimationController: _exitAnimationController,
+              ),
+            ),
             BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
               builder: (context, state) {
                 return AnimatedOrderButton(
                   totalCost: state.totalCost,
                   animationDelay: calculateAnimatedOrderButtonDelay(2),
                   orderType: state.orderType,
-                  onTap: () {},
+                  onTap: () {
+                    if (state.orderType == OrderType.table) {
+                      _exitAnimationController.forward();
+                      // animate out
+                      // navigate to table booking
+                    }
+                  },
                 );
               },
             ),

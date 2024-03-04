@@ -21,7 +21,10 @@ class ShoppingCartState extends Equatable {
 
   int get totalOrderedItems => order.values.fold(0, (prev, element) => prev + element);
 
-  const ShoppingCartState({required this.order, this.orderType = OrderType.delivery});
+  const ShoppingCartState({
+    required this.order,
+    this.orderType = OrderType.delivery,
+  });
 
   ShoppingCartState copyWith({
     Map<DishEntity, Quantity>? order,

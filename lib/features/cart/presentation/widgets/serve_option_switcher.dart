@@ -8,9 +8,11 @@ class ServeOptionSwitcher extends StatefulWidget {
     super.key,
     required this.onSwitch,
     required this.initialOrderType,
+    required this.exitAnimationController,
   });
 
   final Function(OrderType orderType) onSwitch;
+  final AnimationController exitAnimationController;
   final OrderType initialOrderType;
 
   @override
@@ -67,11 +69,24 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
         .animate()
         .slideY(
           duration: 750.ms,
-          begin: -0.1,
+          begin: -0.2,
           end: 0,
           curve: Curves.easeInOutSine,
         )
         .fadeIn(
+          duration: 750.ms,
+        )
+        .animate(
+          controller: widget.exitAnimationController,
+          autoPlay: false,
+        )
+        .slideY(
+          duration: 750.ms,
+          begin: 0.0,
+          end: -0.2,
+          curve: Curves.easeInOutSine,
+        )
+        .fadeOut(
           duration: 750.ms,
         );
   }
