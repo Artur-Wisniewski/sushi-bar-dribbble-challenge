@@ -53,12 +53,9 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
             Expanded(
               child: Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    child: OrderedDishesList(
-                      animationDelay: 250.ms,
-                      exitAnimationController: _exitAnimationController,
-                    ),
+                  OrderedDishesList(
+                    animationDelay: 250.ms,
+                    exitAnimationController: _exitAnimationController,
                   ),
                   Positioned(
                     bottom: 0,

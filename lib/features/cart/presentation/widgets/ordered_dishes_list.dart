@@ -16,52 +16,73 @@ class OrderedDishesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
-      builder: (context, state) {
-        return ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          children: List.generate(state.order.length, (index) {
-            final dish = state.order.keys.elementAt(index);
-            final quantity = state.order[dish]!;
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: OrderedDishCard(
-                dish: dish,
-                quantity: quantity,
-              ),
-            );
-          })
-              .animate(
-                interval: 150.ms,
-                delay: animationDelay,
-              )
-              .fadeIn(
-                duration: 600.ms,
-                curve: Curves.easeInOutSine,
-              )
-              .slideX(
-                begin: 0.05,
-                end: 0,
-                duration: 600.ms,
-                curve: Curves.easeInOutSine,
-              ),
+    return ClipRRect(
+      clipper: _OrderedDishesListClipper(),
+      child: BlocBuilder<ShoppingCartCubit, ShoppingCartState>(
+        builder: (context, state) {
+          return ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(bottom: 100, left: 16, right: 16),
+            children: List.generate(state.order.length, (index) {
+              final dish = state.order.keys.elementAt(index);
+              final quantity = state.order[dish]!;
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: OrderedDishCard(
+                  dish: dish,
+                  quantity: quantity,
+                ),
+              );
+            })
+                .animate(
+                  interval: 150.ms,
+                  delay: animationDelay,
+                )
+                .fadeIn(
+                  duration: 600.ms,
+                  curve: Curves.easeInOutSine,
+                )
+                .slideX(
+                  begin: 0.05,
+                  end: 0,
+                  duration: 600.ms,
+                  curve: Curves.easeInOutSine,
+                ),
+          );
+        },
+      ),
+    )
+        .animate(
+          controller: exitAnimationController,
+          autoPlay: false,
         )
-            .animate(
-              controller: exitAnimationController,
-              autoPlay: false,
-            )
-            .slideX(
-              begin: 0,
-              end: -0.1,
-              duration: 600.ms,
-              curve: Curves.easeInOutSine,
-            )
-            .fadeOut(
-              duration: 600.ms,
-              curve: Curves.easeInOutSine,
-            );
-      },
+        .slideX(
+          begin: 0,
+          end: -0.1,
+          duration: 600.ms,
+          curve: Curves.easeInOutSine,
+        )
+        .fadeOut(
+          duration: 600.ms,
+          curve: Curves.easeInOutSine,
+        );
+  }
+}
+
+class _OrderedDishesListClipper extends CustomClipper<RRect> {
+  @override
+  RRect getClip(Size size) {
+    return RRect.fromRectAndCorners(
+      Rect.fromLTWH(16, 0, size.width - 32, size.height),
+      topLeft: const Radius.circular(20),
+      topRight: const Radius.circular(20),
+      bottomLeft: const Radius.circular(36),
+      bottomRight: const Radius.circular(36),
     );
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<RRect> oldClipper) {
+    return false;
   }
 }
