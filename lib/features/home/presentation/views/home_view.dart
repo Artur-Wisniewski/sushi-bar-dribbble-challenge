@@ -1,4 +1,4 @@
-import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/manager/bottom_bar_navigation_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/category.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/dishes_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/animated_app_bar.dart';

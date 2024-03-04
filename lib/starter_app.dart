@@ -1,4 +1,5 @@
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
+import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'core/styles/theme.dart';
-import 'features/bottom_navigation/manager/bottom_bar_navigation_cubit.dart';
 
 class StarterApp extends StatefulWidget {
   const StarterApp({super.key});
