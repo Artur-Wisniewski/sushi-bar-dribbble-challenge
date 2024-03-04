@@ -3,6 +3,7 @@ import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presenta
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -30,20 +31,24 @@ class _StarterAppState extends State<StarterApp> {
         BlocProvider(create: (_) => ShoppingCartCubit()),
         BlocProvider(create: (_) => BottomBarNavigationCubit()),
       ],
-      child: MaterialApp.router(
-        theme: mainTheme,
-        themeMode: ThemeMode.light,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          L10n.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        routerConfig: router,
-        // onGenerateRoute: onGenerateRoute,
-        // initialRoute: Routes.start,
-        supportedLocales: L10n.delegate.supportedLocales,
+      child: AnnotatedRegion(
+        value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+        ),
+        child: MaterialApp.router(
+          theme: mainTheme,
+          themeMode: ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            L10n.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          routerConfig: router,
+          supportedLocales: L10n.delegate.supportedLocales,
+        ),
       ),
     );
   }
