@@ -35,6 +35,9 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
       if (status == AnimationStatus.forward) {
         _entryAnimationController.reverse();
       }
+      if(status == AnimationStatus.reverse) {
+        _entryAnimationController.forward();
+      }
     });
     super.initState();
   }

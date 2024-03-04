@@ -3,10 +3,12 @@ import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/ordered_dishes_list.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/serve_option_switcher.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -70,6 +72,13 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
                           onTap: () {
                             if (state.orderType == OrderType.table) {
                               _exitAnimationController.forward();
+                              Future.delayed(
+                                750.ms,
+                                () async {
+                                  await context.push(RoutesPaths.bookTable);
+                                  _exitAnimationController.reverse();
+                                },
+                              );
                             }
                           },
                         );
