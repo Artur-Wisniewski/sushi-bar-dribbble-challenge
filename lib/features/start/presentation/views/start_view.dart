@@ -4,7 +4,7 @@ import 'package:dribbble_sushi_bar_challenge/core/constants/rive_animations_path
 import 'package:dribbble_sushi_bar_challenge/core/helpers/load_image.dart';
 import 'package:dribbble_sushi_bar_challenge/core/models/rive_animations/noodles_animation.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
-import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/animated_fade_button.dart';
+import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/animated_bottom_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/title.dart';
 import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:flutter/material.dart';

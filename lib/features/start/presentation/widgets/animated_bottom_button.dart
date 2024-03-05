@@ -1,6 +1,7 @@
 import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/sizes.dart';
+import 'package:dribbble_sushi_bar_challenge/core/widgets/springy_button.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -20,7 +21,6 @@ class AnimatedBottomButton extends StatefulWidget {
 }
 
 class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with TickerProviderStateMixin {
-  late final AnimationController scaleController;
   late final AnimationController colorController;
   late final Animation<Color?> colorAnimation;
 
@@ -28,20 +28,9 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
 
   Duration get slideInDuration => 300.ms;
 
-  Duration get scaleDuration => 150.ms;
-
-  Duration get scaleDownDelay => scaleDuration;
-
-  Offset get scaleDownSizeEndOffset => const Offset(0.95, 0.95);
-
-  Offset get scaleBeginOffset => const Offset(1, 1);
-
-  Offset get scaleUpSizeEndOffset => const Offset(1.1, 1.1);
-
   @override
   void initState() {
     colorController = AnimationController(vsync: this, duration: 300.ms);
-    scaleController = AnimationController(vsync: this);
     super.initState();
   }
 
@@ -56,24 +45,20 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
 
   @override
   void dispose() {
-    scaleController.dispose();
     colorController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      builder: (BuildContext context, Widget? child) {
-        return GestureDetector(
-          onTap: () {
-            scaleController.forward().then((value) => scaleController.value = 0);
-            Future.delayed(scaleDuration, () {
-              colorController.forward();
-              widget.onPressed.call();
-            });
-          },
-          child: Container(
+    return SpringyButton(
+      onPressed: () {
+        colorController.forward();
+        widget.onPressed.call();
+      },
+      child: AnimatedBuilder(
+        builder: (BuildContext context, Widget? child) {
+          return Container(
             alignment: Alignment.center,
             height: Sizes.bottomBarHeight,
             padding: Paddings.mediumAll,
@@ -95,28 +80,13 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
                 delay: widget.delay,
                 duration: fadeInDuration,
                 curve: Curves.easeIn,
-              )
-              .animate(
-                autoPlay: false,
-                controller: scaleController,
-              )
-              .scale(
-                duration: scaleDuration,
-                begin: scaleBeginOffset,
-                end: scaleDownSizeEndOffset,
-              )
-              .then(delay: scaleDownDelay)
-              .scale(
-                duration: scaleDuration,
-                begin: scaleBeginOffset,
-                end: scaleUpSizeEndOffset,
-              ),
-        );
-      },
-      animation: colorAnimation,
-      child: Text(
-        L10n.current.reserveTable,
-        style: Theme.of(context).textTheme.labelLarge,
+              );
+        },
+        animation: colorAnimation,
+        child: Text(
+          L10n.current.reserveTable,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
       ),
     );
   }
