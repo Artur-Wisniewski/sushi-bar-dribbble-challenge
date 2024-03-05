@@ -73,7 +73,7 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
                             if (state.orderType == OrderType.table) {
                               _exitAnimationController.forward();
                               Future.delayed(
-                                750.ms,
+                                800.ms,
                                 () async {
                                   await context.push(RoutesPaths.bookTable);
                                   _exitAnimationController.reverse();
