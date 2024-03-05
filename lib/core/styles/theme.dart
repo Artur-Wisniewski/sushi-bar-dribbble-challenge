@@ -13,6 +13,15 @@ final mainTheme = ThemeData(
     onSecondary: AppColors.grey,
     onSecondaryContainer: Colors.black,
   ),
+  buttonTheme: const ButtonThemeData(
+    buttonColor: AppColors.primary,
+    textTheme: ButtonTextTheme.primary,
+    disabledColor: AppColors.grey2,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+    ),
+  ),
+  disabledColor: AppColors.grey2,
   badgeTheme: const BadgeThemeData(
     backgroundColor: AppColors.scaffoldBackground,
     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

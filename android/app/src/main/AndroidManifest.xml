@@ -2,7 +2,7 @@
     <application
         android:label="dribbble_sushi_bar_challenge"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -27,11 +27,13 @@ dependencies:
   equatable: ^2.0.5
   animated_segmented_tab_control: ^1.2.1
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
@@ -67,3 +69,9 @@ flutter_intl:
   class_name: L10n
   arb_dir: assets/l10n
   output_dir: lib/translations
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21

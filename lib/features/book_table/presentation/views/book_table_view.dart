@@ -1,9 +1,7 @@
-import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
-import 'package:dribbble_sushi_bar_challenge/core/constants/sizes.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
-import 'package:dribbble_sushi_bar_challenge/core/widgets/springy_button.dart';
+import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/animated_bottom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/animated_app_bar.dart';
@@ -24,22 +22,9 @@ class _BookTableViewState extends State<BookTableView> {
       appBar: const AnimatedAppBar(),
       bottomNavigationBar: Padding(
         padding: Paddings.mediumBottom,
-        child: SpringyButton(
-          child: Container(
-            alignment: Alignment.center,
-            height: Sizes.bottomBarHeight,
-            padding: Paddings.mediumAll,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadii.circular,
-            ),
-            child: Text('Reserve'),
-          ),
-          onPressed: () {
-            // _titleController.forward();
-            // _noodlesController.forward();
-            // Future.delayed(400.ms, () => context.go(RoutesPaths.home));
-          },
+        child: AnimatedBottomButton(
+          label: 'Reserve',
+          onPressed: (){},
         ),
       ),
       body: Container(

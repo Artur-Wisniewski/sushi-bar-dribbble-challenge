@@ -40,8 +40,7 @@ class _SpringyButtonState extends State<SpringyButton> with TickerProviderStateM
         scaleController.forward();
       },
       onTapUp: (_) {
-        scaleController.reverse();
-        widget.onPressed.call();
+        scaleController.reverse().then((value) => widget.onPressed.call());
       },
       child: widget.child,
     )
