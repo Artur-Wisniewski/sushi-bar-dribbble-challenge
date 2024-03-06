@@ -11,11 +11,13 @@ class AnimatedBottomButton extends StatefulWidget {
     super.key,
     required this.label,
     required this.onPressed,
+    this.isEnabled = true,
     this.changeColorDuration = const Duration(milliseconds: 400),
   });
 
   final String label;
   final VoidCallback? onPressed;
+  final bool isEnabled;
   final Duration changeColorDuration;
 
   @override
@@ -23,13 +25,13 @@ class AnimatedBottomButton extends StatefulWidget {
 }
 
 class _AnimatedBottomButtonState extends State<AnimatedBottomButton> {
-  late bool _isEnabled = widget.onPressed != null;
+  late bool _isEnabled = widget.isEnabled;
 
   @override
   void didUpdateWidget(covariant AnimatedBottomButton oldWidget) {
-    if (oldWidget.onPressed != widget.onPressed) {
+    if (oldWidget.isEnabled != widget.isEnabled) {
       setState(() {
-        _isEnabled = widget.onPressed != null;
+        _isEnabled = widget.isEnabled;
       });
     }
     super.didUpdateWidget(oldWidget);

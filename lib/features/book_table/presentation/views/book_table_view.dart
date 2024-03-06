@@ -2,6 +2,7 @@ import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/animated_bottom_button.dart';
+import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reservable_tables_grid.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reserved_tables_legend.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
@@ -27,6 +28,15 @@ class _BookTableViewState extends State<BookTableView> {
     context.pop();
   }
 
+  void onReserve() {
+    showModalBottomSheet<void>(
+      context: context,
+      barrierColor: Colors.transparent,
+      builder: (BuildContext context) => const DatePickerBottomSheet(),
+
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -45,9 +55,8 @@ class _BookTableViewState extends State<BookTableView> {
               builder: (context, child) {
                 return AnimatedBottomButton(
                   label: 'Reserve',
-                  onPressed: pickedTableNotifier.value != null ? () {
-                    //TODO show bottom modal
-                  } : null,
+                  isEnabled: pickedTableNotifier.value != null,
+                  onPressed: onReserve,
                 );
               }),
         ),
