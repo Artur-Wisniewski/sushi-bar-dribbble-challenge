@@ -325,6 +325,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  hexagon:
+    dependency: "direct main"
+    description:
+      name: hexagon
+      sha256: "058f445a8c293c2a0474546cd6f592693bf8b014f5c682e8174d34d5fd024d87"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   http:
     dependency: transitive
     description:

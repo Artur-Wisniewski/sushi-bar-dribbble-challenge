@@ -53,7 +53,7 @@ class _StarterAppState extends State<StarterApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          routerConfig: createRouter(),
+          routerConfig: router,
           supportedLocales: L10n.delegate.supportedLocales,
         ),
       ),

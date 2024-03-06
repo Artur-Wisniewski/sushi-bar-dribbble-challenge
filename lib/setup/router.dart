@@ -15,60 +15,58 @@ class RoutesPaths {
   static const start = '/';
 }
 
-GoRouter createRouter() {
-  return GoRouter(
-    routes: [
-      GoRoute(
-        path: RoutesPaths.start,
-        pageBuilder: (context, state) => NoTransitionPage<void>(
-          key: state.pageKey,
-          child: const StartView(),
-        ),
+final router = GoRouter(
+  routes: [
+    GoRoute(
+      path: RoutesPaths.start,
+      pageBuilder: (context, state) => NoTransitionPage<void>(
+        key: state.pageKey,
+        child: const StartView(),
       ),
-      ShellRoute(
-        builder: (BuildContext context, GoRouterState state, Widget child) {
-          return Scaffold(
-            extendBody: true,
-            body: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.scaffoldBackground,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(ImagePaths.wavesBackground),
-                ),
+    ),
+    ShellRoute(
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return Scaffold(
+          extendBody: true,
+          body: Container(
+            decoration: const BoxDecoration(
+              color: AppColors.scaffoldBackground,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(ImagePaths.wavesBackground),
               ),
-              child: child,
             ),
-            bottomNavigationBar: const AnimatedBottomBar(),
-          );
-        },
-        routes: [
-          GoRoute(
-            path: RoutesPaths.home,
-            pageBuilder: (context, state) => NoTransitionPage<void>(
-              key: state.pageKey,
-              child: const HomeView(),
-            ),
+            child: child,
           ),
-          GoRoute(
-            path: RoutesPaths.cart,
-            pageBuilder: (context, state) => NoTransitionPage<void>(
-              key: state.pageKey,
-              child: const CartView(),
-            ),
+          bottomNavigationBar: const AnimatedBottomBar(),
+        );
+      },
+      routes: [
+        GoRoute(
+          path: RoutesPaths.home,
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+            key: state.pageKey,
+            child: const HomeView(),
           ),
-        ],
-      ),
-      GoRoute(
-        path: RoutesPaths.bookTable,
-        pageBuilder: (context, state) => NoTransitionPage<void>(
-          key: state.pageKey,
-          child: const BookTableView(),
         ),
+        GoRoute(
+          path: RoutesPaths.cart,
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+            key: state.pageKey,
+            child: const CartView(),
+          ),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: RoutesPaths.bookTable,
+      pageBuilder: (context, state) => NoTransitionPage<void>(
+        key: state.pageKey,
+        child: const BookTableView(),
       ),
-    ],
-  );
-}
+    ),
+  ],
+);
 
 class GoRouterObserver extends NavigatorObserver {
   GoRouterObserver({

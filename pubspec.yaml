@@ -26,6 +26,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   equatable: ^2.0.5
   animated_segmented_tab_control: ^1.2.1
+  hexagon: ^0.2.0
 
 
 dev_dependencies:
