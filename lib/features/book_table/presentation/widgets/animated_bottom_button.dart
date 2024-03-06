@@ -51,7 +51,7 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> {
         duration: widget.changeColorDuration,
         child: AnimatedDefaultTextStyle(
           style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: _isEnabled ? Theme.of(context).colorScheme.secondary : AppColors.darkGrey,
+                color: _isEnabled ? Theme.of(context).colorScheme.secondary : AppColors.greyMedium,
               ),
           duration: widget.changeColorDuration,
           child: Text(widget.label),

@@ -15,55 +15,84 @@ class RoutesPaths {
   static const start = '/';
 }
 
-final router = GoRouter(
-  routes: [
-    GoRoute(
-      path: RoutesPaths.start,
-      pageBuilder: (context, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const StartView(),
+GoRouter createRouter() {
+  return GoRouter(
+    routes: [
+      GoRoute(
+        path: RoutesPaths.start,
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+          key: state.pageKey,
+          child: const StartView(),
+        ),
       ),
-    ),
-    ShellRoute(
-      builder: (BuildContext context, GoRouterState state, Widget child) {
-        return Scaffold(
-          extendBody: true,
-          body: Container(
-            decoration: const BoxDecoration(
-              color: AppColors.scaffoldBackground,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(ImagePaths.wavesBackground),
+      ShellRoute(
+        builder: (BuildContext context, GoRouterState state, Widget child) {
+          return Scaffold(
+            extendBody: true,
+            body: Container(
+              decoration: const BoxDecoration(
+                color: AppColors.scaffoldBackground,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(ImagePaths.wavesBackground),
+                ),
               ),
+              child: child,
             ),
-            child: child,
+            bottomNavigationBar: const AnimatedBottomBar(),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: RoutesPaths.home,
+            pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const HomeView(),
+            ),
           ),
-          bottomNavigationBar: const AnimatedBottomBar(),
-        );
-      },
-      routes: [
-        GoRoute(
-          path: RoutesPaths.home,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-            key: state.pageKey,
-            child: const HomeView(),
+          GoRoute(
+            path: RoutesPaths.cart,
+            pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const CartView(),
+            ),
           ),
-        ),
-        GoRoute(
-          path: RoutesPaths.cart,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-            key: state.pageKey,
-            child: const CartView(),
-          ),
-        ),
-      ],
-    ),
-    GoRoute(
-      path: RoutesPaths.bookTable,
-      pageBuilder: (context, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const BookTableView(),
+        ],
       ),
-    ),
-  ],
-);
+      GoRoute(
+        path: RoutesPaths.bookTable,
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+          key: state.pageKey,
+          child: const BookTableView(),
+        ),
+      ),
+    ],
+  );
+}
+
+class GoRouterObserver extends NavigatorObserver {
+  GoRouterObserver({
+    this.onDidPush,
+    this.onDidPop,
+    this.onDidRemove,
+    this.onDidReplace,
+  });
+
+  final Function(Route<dynamic> route, Route<dynamic>? previousRoute)? onDidPush;
+  final Function(Route<dynamic> route, Route<dynamic>? previousRoute)? onDidPop;
+  final Function(Route<dynamic> route, Route<dynamic>? previousRoute)? onDidRemove;
+  final Function({Route<dynamic>? newRoute, Route<dynamic>? oldRoute})? onDidReplace;
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => onDidPush?.call(route, previousRoute);
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => onDidPop?.call(route, previousRoute);
+
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) => onDidRemove?.call(route, previousRoute);
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) =>
+      onDidReplace?.call(newRoute: newRoute, oldRoute: oldRoute);
+}

@@ -19,20 +19,44 @@ class AnimatedBottomBar extends StatefulWidget {
   State<AnimatedBottomBar> createState() => _AnimatedBottomBarState();
 }
 
-class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
+class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTickerProviderStateMixin {
+  late final AnimationController _fadeOutAnimationController = AnimationController(
+    vsync: this,
+    duration: 500.ms,
+  );
+
+  @override
+  void dispose() {
+    _fadeOutAnimationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: Paddings.mediumBottom,
-      child: Container(
-        height: Sizes.bottomBarHeight,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadii.circular,
-        ),
-        child: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
-          builder: (context, bottomBarState) {
-            return Row(
+      child: BlocConsumer<BottomBarNavigationCubit, BottomBarNavigationState>(
+        listener: (context, state) {
+          if (state.isNavigatedOutsideShell) {
+            _fadeOutAnimationController.forward();
+          } else {
+            _fadeOutAnimationController.reverse();
+          }
+        },
+        listenWhen: (previous, current) {
+          return previous.isNavigatedOutsideShell != current.isNavigatedOutsideShell;
+        },
+        builder: (context, bottomBarState) {
+          return AnimatedContainer(
+            height: Sizes.bottomBarHeight,
+            decoration: BoxDecoration(
+              color: bottomBarState.isNavigatedOutsideShell
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadii.circular,
+            ),
+            duration: 500.ms,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 AnimatedBottomBarItem(
@@ -78,9 +102,16 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
                     end: 0,
                     duration: 300.ms,
                   ),
-            );
-          },
-        ),
+            )
+                .animate(
+                  controller: _fadeOutAnimationController,
+                  autoPlay: false,
+                )
+                .fadeOut(
+                  duration: 500.ms,
+                ),
+          );
+        },
       ),
     );
   }

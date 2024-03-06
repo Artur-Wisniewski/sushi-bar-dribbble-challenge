@@ -18,6 +18,13 @@ class StarterApp extends StatefulWidget {
 }
 
 class _StarterAppState extends State<StarterApp> {
+  final bottomBarNavigationCubit = BottomBarNavigationCubit();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   void didChangeDependencies() {
     precacheImage(const AssetImage(ImagePaths.wavesBackground), context);
@@ -29,7 +36,7 @@ class _StarterAppState extends State<StarterApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ShoppingCartCubit()),
-        BlocProvider(create: (_) => BottomBarNavigationCubit()),
+        BlocProvider.value(value: bottomBarNavigationCubit),
       ],
       child: AnnotatedRegion(
         value: const SystemUiOverlayStyle(
@@ -46,7 +53,7 @@ class _StarterAppState extends State<StarterApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          routerConfig: router,
+          routerConfig: createRouter(),
           supportedLocales: L10n.delegate.supportedLocales,
         ),
       ),

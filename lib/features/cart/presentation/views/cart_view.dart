@@ -72,6 +72,9 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
                           onTap: () {
                             if (state.orderType == OrderType.table) {
                               _exitAnimationController.forward();
+                              Future.delayed(250.ms, () {
+                                context.read<BottomBarNavigationCubit>().markNavigateOutsideShell(true);
+                              });
                               Future.delayed(
                                 800.ms,
                                 () async {

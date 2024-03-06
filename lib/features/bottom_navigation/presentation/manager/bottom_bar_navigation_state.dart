@@ -8,10 +8,22 @@ enum BottomBarItems {
 }
 
 class BottomBarNavigationState extends Equatable {
-  const BottomBarNavigationState(this.currentItem);
+  const BottomBarNavigationState({required this.currentItem, this.isNavigatedOutsideShell = false});
 
   final BottomBarItems currentItem;
 
+  final bool isNavigatedOutsideShell;
+
+  BottomBarNavigationState copyWith({
+    BottomBarItems? currentItem,
+    bool? isNavigatedOutsideShell,
+  }) {
+    return BottomBarNavigationState(
+      currentItem: currentItem ?? this.currentItem,
+      isNavigatedOutsideShell: isNavigatedOutsideShell ?? this.isNavigatedOutsideShell,
+    );
+  }
+
   @override
-  List<Object?> get props => [currentItem];
+  List<Object?> get props => [currentItem, isNavigatedOutsideShell];
 }

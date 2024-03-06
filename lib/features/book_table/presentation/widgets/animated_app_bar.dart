@@ -4,14 +4,15 @@ import 'package:dribbble_sushi_bar_challenge/core/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const AnimatedAppBar({super.key});
+  const AnimatedAppBar({super.key, required this.onLeadingButton});
 
   static const paddingLeft = 16.0;
   static const height = 70.0;
   static const backButtonWidth = 44.0;
+
+  final VoidCallback onLeadingButton;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,7 @@ class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Gap(paddingLeft),
           RoundIconButton(
             icon: Icons.arrow_back,
-            onPressed: () {
-              context.pop();
-            },
+            onPressed: onLeadingButton,
           )
               .animate()
               .fadeIn(
