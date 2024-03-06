@@ -4,6 +4,7 @@ import 'package:dribbble_sushi_bar_challenge/core/constants/sizes.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/springy_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class AnimatedBottomButton extends StatefulWidget {
   const AnimatedBottomButton({
@@ -55,7 +56,7 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> {
               ),
           duration: widget.changeColorDuration,
           child: Text(widget.label),
-        ),
+        ).animate().fadeIn(duration: 150.ms),
       ),
     );
   }
