@@ -45,9 +45,15 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
     showMaterialModalBottomSheet(
       expand: false,
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       barrierColor: Colors.transparent,
       secondAnimation: _blurAnimationController,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       builder: (context) => const DatePickerBottomSheet(),
     );
   }
