@@ -23,5 +23,6 @@
   "time": "Time",
   "numberOfGuests": "Number of guests",
   "confirm": "Confirm",
-  "decemberShort": "dec"
+  "decemberShort": "dec",
+  "order": "Order"
 }

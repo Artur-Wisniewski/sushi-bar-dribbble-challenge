@@ -3,6 +3,7 @@ import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/sizes.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/text_swapper.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -35,7 +36,7 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
       if (status == AnimationStatus.forward) {
         _entryAnimationController.reverse();
       }
-      if(status == AnimationStatus.reverse) {
+      if (status == AnimationStatus.reverse) {
         _entryAnimationController.forward();
       }
     });
@@ -59,7 +60,9 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
             borderRadius: BorderRadii.circular,
           ),
           child: TextSwapper(
-            text: widget.orderType.isDelivery ? 'Order \$${widget.totalCost.toStringAsFixed(0)}' : 'Book a table',
+            text: widget.orderType.isDelivery
+                ? '${L10n.current.order} \$${widget.totalCost.toStringAsFixed(0)}'
+                : L10n.current.bookTable,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.secondary),
           ),
         )

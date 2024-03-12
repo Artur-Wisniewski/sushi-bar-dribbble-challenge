@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kani syake roll with shrimp and surimi"),
         "numberOfGuests":
             MessageLookupByLibrary.simpleMessage("Number of guests"),
+        "order": MessageLookupByLibrary.simpleMessage("Order"),
         "orderDelivery": MessageLookupByLibrary.simpleMessage("Order delivery"),
         "originalRamenWithHakataNoodles": MessageLookupByLibrary.simpleMessage(
             "Original Ramen with Hakata noodles"),

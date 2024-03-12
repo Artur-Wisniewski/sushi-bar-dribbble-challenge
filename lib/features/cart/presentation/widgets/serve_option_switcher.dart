@@ -1,5 +1,6 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -57,12 +58,12 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
       selectedTabTextColor: Theme.of(context).colorScheme.secondary,
       textStyle: Theme.of(context).textTheme.bodyMedium,
       indicatorPadding: const EdgeInsets.all(4),
-      tabs: const [
+      tabs: [
         SegmentTab(
-          label: "Order Delivery",
+          label: L10n.current.orderDelivery,
         ),
         SegmentTab(
-          label: "In the restaurant",
+          label: L10n.current.inTheRestaurant,
         ),
       ],
     )
