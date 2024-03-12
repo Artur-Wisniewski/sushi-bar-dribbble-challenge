@@ -3,8 +3,9 @@ import 'dart:ui';
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
+import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/animated_bottom_button.dart';
-import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet.dart';
+import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet/date_picker_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reservable_tables_grid.dart';
@@ -31,6 +32,8 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
     vsync: this,
   );
 
+  final BookTableCubit bookTableCubit = BookTableCubit();
+
   @override
   void initState() {
     super.initState();
@@ -54,7 +57,7 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
           topRight: Radius.circular(20),
         ),
       ),
-      builder: (context) => const DatePickerBottomSheet(),
+      builder: (context) => DatePickerBottomSheet(bookTableCubit: bookTableCubit),
     );
   }
 
@@ -116,7 +119,8 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
             child: AnimatedBuilder(
               builder: (context, _) {
                 return BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: _blurAnimationController.value * 2, sigmaY: _blurAnimationController.value * 2),
+                  filter: ImageFilter.blur(
+                      sigmaX: _blurAnimationController.value * 2, sigmaY: _blurAnimationController.value * 2),
                   child: Container(),
                 );
               },

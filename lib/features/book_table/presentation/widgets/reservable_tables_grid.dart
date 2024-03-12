@@ -33,7 +33,7 @@ class _ReservableTablesGridState extends State<ReservableTablesGrid> {
     final isFreeInput = ctrl.findInput<bool>('isFree') as SMIBool;
     final showInput = ctrl.findInput<bool>('appear') as SMITrigger;
     isFreeInput.value = isEnabled;
-    Future.delayed(150.ms + 80.ms * getIndexByRowAndCol(row, col), () => showInput.fire());
+    Future.delayed(200.ms + 80.ms * getIndexByRowAndCol(row, col), () => showInput.fire());
     art.addController(ctrl);
     setState(() {
       tablesAnimationsControllers.addAll({(row, col): ctrl});

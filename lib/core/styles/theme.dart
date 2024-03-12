@@ -12,6 +12,7 @@ final mainTheme = ThemeData(
     onBackground: AppColors.grey,
     onSecondary: AppColors.grey,
     onSecondaryContainer: Colors.black,
+    secondaryContainer: Color(0xFFf7f7f7),
   ),
   buttonTheme: const ButtonThemeData(
     buttonColor: AppColors.primary,

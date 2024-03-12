@@ -44,7 +44,7 @@ class AnimatedAppBar extends StatelessWidget {
               end: 0,
               curve: Curves.easeInOutSine,
             ),
-        const RoundIconButton(icon: Icons.search)
+        const RoundIconButton.primary(icon: Icons.search)
             .animate(
               controller: appBarAnimationController,
             )

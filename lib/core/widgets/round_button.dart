@@ -5,28 +5,56 @@ class RoundIconButton extends StatelessWidget {
     super.key,
     required this.icon,
     this.onPressed,
+    required this.size,
+    required this.iconSize,
+    this.isPrimary = true,
   });
+
+  const RoundIconButton.primary({
+    super.key,
+    required this.icon,
+    this.onPressed,
+  })  : size = 44,
+        iconSize = 26,
+        isPrimary = true;
+
+  const RoundIconButton.secondary({
+    super.key,
+    required this.icon,
+    this.onPressed,
+  })  : size = 24,
+        iconSize = 16,
+        isPrimary = false;
 
   final IconData icon;
   final VoidCallback? onPressed;
+  final double size;
+  final double iconSize;
+  final bool isPrimary;
 
   @override
   Widget build(BuildContext context) {
+    final color = isPrimary ? Theme.of(context).colorScheme.primary : Theme.of(context).scaffoldBackgroundColor;
+    final border = isPrimary
+        ? Border.all(
+            color: Theme.of(context).colorScheme.onPrimary,
+            width: 2,
+          )
+        : null;
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: 44,
-        width: 44,
+        height: size,
+        width: size,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: color,
           shape: BoxShape.circle,
-          border: Border.all(
-            color: Theme.of(context).colorScheme.onPrimary,
-            width: 2,
-          ),
+          border: border,
         ),
         child: Icon(
           icon,
+          size: iconSize,
           color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),

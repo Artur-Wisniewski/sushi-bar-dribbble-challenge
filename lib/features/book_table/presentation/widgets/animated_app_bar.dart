@@ -41,7 +41,7 @@ class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Row(
         children: [
           const Gap(paddingLeft),
-          RoundIconButton(
+          RoundIconButton.primary(
             icon: Icons.arrow_back,
             onPressed: onLeadingButton,
           )
