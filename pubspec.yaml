@@ -1,10 +1,10 @@
 name: dribbble_sushi_bar_challenge
 description: "Dribbble sushi bar challenge"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
-  sdk: '>=3.2.4 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter
@@ -27,6 +27,7 @@ dependencies:
   equatable: ^2.0.5
   animated_segmented_tab_control: ^1.2.1
   hexagon: ^0.2.0
+  modal_bottom_sheet: ^3.0.0
 
 
 dev_dependencies:

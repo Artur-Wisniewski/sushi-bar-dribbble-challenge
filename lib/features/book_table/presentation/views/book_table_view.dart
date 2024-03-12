@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/animated_bottom_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reservable_tables_grid.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reserved_tables_legend.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
@@ -20,8 +24,17 @@ class BookTableView extends StatefulWidget {
   State<BookTableView> createState() => _BookTableViewState();
 }
 
-class _BookTableViewState extends State<BookTableView> {
+class _BookTableViewState extends State<BookTableView> with SingleTickerProviderStateMixin {
   final ValueNotifier<(int, int)?> pickedTableNotifier = ValueNotifier(null);
+  late final AnimationController _blurAnimationController = AnimationController(
+    duration: 500.ms,
+    vsync: this,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void onPopInvoked() {
     context.read<BottomBarNavigationCubit>().markNavigateOutsideShell(false);
@@ -29,57 +42,83 @@ class _BookTableViewState extends State<BookTableView> {
   }
 
   void onReserve() {
-    showModalBottomSheet<void>(
+    showMaterialModalBottomSheet(
+      expand: false,
       context: context,
+      backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
-      builder: (BuildContext context) => const DatePickerBottomSheet(),
-
+      secondAnimation: _blurAnimationController,
+      builder: (context) => const DatePickerBottomSheet(),
     );
   }
 
   @override
+  void dispose() {
+    _blurAnimationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (bool didPop) {
-        onPopInvoked();
-      },
-      child: Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        appBar: AnimatedAppBar(onLeadingButton: onPopInvoked),
-        bottomNavigationBar: Padding(
-          padding: Paddings.mediumBottom,
-          child: AnimatedBuilder(
-              animation: pickedTableNotifier,
-              builder: (context, child) {
-                return AnimatedBottomButton(
-                  label: 'Reserve',
-                  isEnabled: pickedTableNotifier.value != null,
-                  onPressed: onReserve,
-                );
-              }),
-        ),
-        body: Container(
-          decoration: const BoxDecoration(
-            color: AppColors.scaffoldBackground,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(ImagePaths.wavesBackground),
+    return Stack(
+      children: [
+        PopScope(
+          canPop: false,
+          onPopInvoked: (bool didPop) {
+            onPopInvoked();
+          },
+          child: Scaffold(
+            extendBody: true,
+            extendBodyBehindAppBar: true,
+            appBar: AnimatedAppBar(onLeadingButton: onPopInvoked),
+            bottomNavigationBar: Padding(
+              padding: Paddings.mediumBottom,
+              child: AnimatedBuilder(
+                  animation: pickedTableNotifier,
+                  builder: (context, child) {
+                    return AnimatedBottomButton(
+                      label: 'Reserve',
+                      isEnabled: pickedTableNotifier.value != null,
+                      onPressed: onReserve,
+                    );
+                  }),
             ),
-          ),
-          child: SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: ReservableTablesGrid(pickedTableNotifier: pickedTableNotifier),
+            body: Container(
+              decoration: const BoxDecoration(
+                color: AppColors.scaffoldBackground,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(ImagePaths.wavesBackground),
                 ),
-                ReservedTablesLegend(animationDelay: 500.ms)
-              ],
+              ),
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ReservableTablesGrid(pickedTableNotifier: pickedTableNotifier),
+                    ),
+                    ReservedTablesLegend(animationDelay: 500.ms)
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          child: SizedBox.expand(
+            child: AnimatedBuilder(
+              builder: (context, _) {
+                return BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: _blurAnimationController.value * 2, sigmaY: _blurAnimationController.value * 2),
+                  child: Container(),
+                );
+              },
+              animation: _blurAnimationController,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

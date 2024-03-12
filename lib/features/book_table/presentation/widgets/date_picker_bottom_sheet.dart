@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DatePickerBottomSheet extends StatefulWidget {
   const DatePickerBottomSheet({super.key});
@@ -8,44 +11,36 @@ class DatePickerBottomSheet extends StatefulWidget {
 }
 
 class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> with SingleTickerProviderStateMixin {
-  late final AnimationController _backgroundGlassAnimationController;
-
-  @override
-  initState() {
-    super.initState();
-    _backgroundGlassAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
-      vsync: this,
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    _backgroundGlassAnimationController.forward();
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          color: Colors.white,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                const Text('Modal BottomSheet'),
-                ElevatedButton(
-                  child: const Text('Close BottomSheet'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ],
+    return Material(
+      child: SafeArea(
+        bottom: false,
+        child: ListView(
+          reverse: false,
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(20),
+          controller: ModalScrollController.of(context),
+          physics: const ClampingScrollPhysics(),
+          children: [
+            Text('Number of quests', style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
+            // number picker
+            const Gap(56),
+            Text('Day', style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
+            // day picker
+            const Gap(56),
+            Text('Time', style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
+            // time picker
+            const Gap(56),
+            CupertinoButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Confirm'),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
