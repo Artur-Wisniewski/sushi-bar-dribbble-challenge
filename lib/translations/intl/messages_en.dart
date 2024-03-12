@@ -27,7 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "aNew": MessageLookupByLibrary.simpleMessage("New"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "bookTable": MessageLookupByLibrary.simpleMessage("Book a table"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
+        "decemberShort": MessageLookupByLibrary.simpleMessage("dec"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freshCaliforniaBowlWithSalmon": MessageLookupByLibrary.simpleMessage(
             "Fresh California Bowl with salmon"),
@@ -36,8 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("In the restaurant"),
         "kaniSyake": MessageLookupByLibrary.simpleMessage(
             "Kani syake roll with shrimp and surimi"),
-        "numberOfQuests":
-            MessageLookupByLibrary.simpleMessage("Number of quests"),
+        "numberOfGuests":
+            MessageLookupByLibrary.simpleMessage("Number of guests"),
         "orderDelivery": MessageLookupByLibrary.simpleMessage("Order delivery"),
         "originalRamenWithHakataNoodles": MessageLookupByLibrary.simpleMessage(
             "Original Ramen with Hakata noodles"),

@@ -1,5 +1,5 @@
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,10 @@ class DaySection extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text('Day', style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
+          child: Text(
+            L10n.current.day,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
+          ),
         ),
         const Gap(12),
         BlocBuilder<BookTableCubit, BookTableState>(
@@ -33,7 +36,7 @@ class DaySection extends StatelessWidget {
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: List.generate(31, (index) {
-                  final day = '${index + 1} dec';
+                  final day = '${index + 1} ${L10n.current.decemberShort}';
                   bool isPicked = day == state.day;
                   Color color = isPicked
                       ? Theme.of(context).scaffoldBackgroundColor

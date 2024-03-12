@@ -1,4 +1,5 @@
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,10 @@ class TimeSection extends StatelessWidget {
       children: [
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text('Time', style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black))),
+            child: Text(
+              L10n.current.time,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
+            )),
         const Gap(12),
         BlocBuilder<BookTableCubit, BookTableState>(
           bloc: bookTableCubit,

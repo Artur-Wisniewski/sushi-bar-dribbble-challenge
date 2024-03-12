@@ -250,16 +250,6 @@ class L10n {
     );
   }
 
-  /// `Number of quests`
-  String get numberOfQuests {
-    return Intl.message(
-      'Number of quests',
-      name: 'numberOfQuests',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Day`
   String get day {
     return Intl.message(
@@ -275,6 +265,36 @@ class L10n {
     return Intl.message(
       'Time',
       name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of guests`
+  String get numberOfGuests {
+    return Intl.message(
+      'Number of guests',
+      name: 'numberOfGuests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `dec`
+  String get decemberShort {
+    return Intl.message(
+      'dec',
+      name: 'decemberShort',
       desc: '',
       args: [],
     );

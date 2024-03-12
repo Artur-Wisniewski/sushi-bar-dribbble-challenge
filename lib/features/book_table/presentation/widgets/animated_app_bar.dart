@@ -1,6 +1,7 @@
 // appBar: ,
 
 import 'package:dribbble_sushi_bar_challenge/core/widgets/round_button.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -19,7 +20,7 @@ class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       title: Text(
-        'Book a Table',
+        L10n.current.bookTable,
         style: TextStyle(
           color: Theme.of(context).colorScheme.secondary,
           fontSize: 24,

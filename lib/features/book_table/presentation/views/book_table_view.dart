@@ -6,6 +6,7 @@ import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/animated_bottom_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet/date_picker_bottom_sheet.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reservable_tables_grid.dart';
@@ -86,7 +87,7 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
                   animation: pickedTableNotifier,
                   builder: (context, child) {
                     return AnimatedBottomButton(
-                      label: 'Reserve',
+                      label: L10n.current.reserve,
                       isEnabled: pickedTableNotifier.value != null,
                       onPressed: onReserve,
                     );

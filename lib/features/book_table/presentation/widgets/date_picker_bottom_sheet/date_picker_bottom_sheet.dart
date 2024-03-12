@@ -4,6 +4,7 @@ import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/wi
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet/widgets/day_section.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet/widgets/number_of_guests_section.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet/widgets/time_section.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -40,7 +41,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> with Sing
         Padding(
           padding: const EdgeInsets.all(24.0),
           child: AnimatedBottomButton(
-            label: 'Confirm',
+            label: L10n.current.confirm,
             isEnabled: true,
             onPressed: () {},
           ),

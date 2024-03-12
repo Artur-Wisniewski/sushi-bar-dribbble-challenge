@@ -19,7 +19,9 @@
   "reserved": "Reserved",
   "free": "Free",
   "reserve": "Reserve",
-  "numberOfQuests": "Number of quests",
   "day": "Day",
-  "time": "Time"
+  "time": "Time",
+  "numberOfGuests": "Number of guests",
+  "confirm": "Confirm",
+  "decemberShort": "dec"
 }
