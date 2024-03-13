@@ -120,4 +120,11 @@ class _TextSwapperState extends State<TextSwapper> with TickerProviderStateMixin
       ],
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _controller2.dispose();
+    super.dispose();
+  }
 }

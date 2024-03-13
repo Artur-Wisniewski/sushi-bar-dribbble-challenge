@@ -1,7 +1,5 @@
 part of 'book_table_cubit.dart';
 
-
-
 class BookTableState extends Equatable {
   final int numberOfGuests;
   final String day;

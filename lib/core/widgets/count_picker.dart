@@ -115,7 +115,7 @@ class _CountPickerState extends State<CountPicker> with TickerProviderStateMixin
                         delay: scaleDownDelay,
                         duration: scaleDuration,
                       ),
-               TextSwapper(
+                TextSwapper(
                   key: key,
                   text: counter.value > 0 ? counter.value.toString() : '\$${widget.price.toStringAsFixed(0)}',
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(

@@ -21,8 +21,6 @@ class ServeOptionSwitcher extends StatefulWidget {
 }
 
 class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTickerProviderStateMixin {
-  //TODO swap all text with l10n strings
-
   late final TabController _tabController;
 
   @override

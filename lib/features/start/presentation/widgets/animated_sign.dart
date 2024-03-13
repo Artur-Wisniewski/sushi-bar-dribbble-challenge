@@ -18,17 +18,18 @@ class AnimatedSign extends StatelessWidget {
     return Image.asset(
       imagePath,
       height: signHeight,
-    ).animate()
-        .slideX(
-      begin: 0.7,
-      end: 0,
-      delay: delay,
-      duration: 400.ms,
-      curve: Curves.easeIn,
     )
+        .animate()
+        .slideX(
+          begin: 0.7,
+          end: 0,
+          delay: delay,
+          duration: 400.ms,
+          curve: Curves.easeIn,
+        )
         .fadeIn(
-      delay: delay,
-      duration: 400.ms,
-    );
+          delay: delay,
+          duration: 400.ms,
+        );
   }
 }

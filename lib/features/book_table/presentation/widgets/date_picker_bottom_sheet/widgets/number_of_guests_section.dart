@@ -19,7 +19,8 @@ class NumberOfGuestsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.current.numberOfGuests, style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
+          Text(L10n.current.numberOfGuests,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
           const Gap(20),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

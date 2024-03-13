@@ -65,9 +65,11 @@ class _ReservableTablesGridState extends State<ReservableTablesGrid> {
                 onTap: () {
                   final controller = tablesAnimationsControllers[(row, col)];
                   final toggle = controller?.findInput<bool>('toggle') as SMITrigger;
-                  if (row % 2 == 0 && widget.pickedTableNotifier.value == null || widget.pickedTableNotifier.value == (row, col)) {
+                  if (row % 2 == 0 && widget.pickedTableNotifier.value == null ||
+                      widget.pickedTableNotifier.value == (row, col)) {
                     toggle.fire();
-                    setState(() => widget.pickedTableNotifier.value = widget.pickedTableNotifier.value == (row, col) ? null : (row, col));
+                    setState(() => widget.pickedTableNotifier.value =
+                        widget.pickedTableNotifier.value == (row, col) ? null : (row, col));
                   }
                 },
                 child: Stack(
@@ -82,7 +84,9 @@ class _ReservableTablesGridState extends State<ReservableTablesGrid> {
                     ),
                     AnimatedDefaultTextStyle(
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: isEnabled(row) && widget.pickedTableNotifier.value != (row, col) ? Colors.black : Colors.white,
+                            color: isEnabled(row) && widget.pickedTableNotifier.value != (row, col)
+                                ? Colors.black
+                                : Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                       duration: 150.ms,

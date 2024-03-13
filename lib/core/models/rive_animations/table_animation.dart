@@ -3,5 +3,5 @@ class TableAnimation {
   static const inputToggle = 'toggle';
   static const inputIsFree = 'isFree';
   static const stateMachineName = 'idle';
-    static const animationName = 'appear';
+  static const animationName = 'appear';
 }
