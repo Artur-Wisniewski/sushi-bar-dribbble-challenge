@@ -34,7 +34,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: Paddings.mediumBottom,
+      padding: Paddings.mediumAllBottomBig,
       child: BlocConsumer<BottomBarNavigationCubit, BottomBarNavigationState>(
         listener: (context, state) {
           if (state.isNavigatedOutsideShell) {

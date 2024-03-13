@@ -82,7 +82,7 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
             extendBodyBehindAppBar: true,
             appBar: AnimatedAppBar(onLeadingButton: onPopInvoked),
             bottomNavigationBar: Padding(
-              padding: Paddings.mediumBottom,
+              padding: Paddings.mediumAllBottomBig,
               child: AnimatedBuilder(
                   animation: pickedTableNotifier,
                   builder: (context, child) {

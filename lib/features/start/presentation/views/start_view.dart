@@ -115,7 +115,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
         ),
       ).animate().fadeIn(duration: 300.ms),
       bottomNavigationBar: Padding(
-        padding: Paddings.mediumBottom,
+        padding: Paddings.mediumAllBottomBig,
         child: AnimatedBottomButton(
             delay: buttonDelay,
             onPressed: () {

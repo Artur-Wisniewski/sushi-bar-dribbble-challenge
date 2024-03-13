@@ -1,8 +1,7 @@
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
-import 'package:dribbble_sushi_bar_challenge/features/start/presentation/widgets/animated_sign.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gap/gap.dart';
 
 class TitleJapanese extends StatelessWidget {
   const TitleJapanese({super.key, required this.height, required this.delay});
@@ -15,21 +14,9 @@ class TitleJapanese extends StatelessWidget {
 
   Duration get fadeInDuration => 400.ms;
 
-  Duration get slideDuration => 500.ms;
+  Duration get slideDuration => 400.ms;
 
-  Duration get delayBetweenSigns => 200.ms;
-
-  Duration get firstSignDelay => delay;
-
-  Duration get secondSignDelay => delay + delayBetweenSigns;
-
-  Duration get thirdSignDelay => secondSignDelay + delayBetweenSigns;
-
-  Duration get fourthSignDelay => thirdSignDelay + delayBetweenSigns;
-
-  Duration get fifthSignDelay => fourthSignDelay + delayBetweenSigns;
-
-  // TODO do it better with group intervals animation
+  Duration get interval => 200.ms;
 
   @override
   Widget build(BuildContext context) {
@@ -39,36 +26,54 @@ class TitleJapanese extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
         children: [
-          AnimatedSign(
-            imagePath: ImagePaths.sing1,
-            signHeight: signHeight,
-            delay: firstSignDelay,
+          Padding(
+            padding: Paddings.mediumBottom,
+            child: Image.asset(
+              ImagePaths.sing1,
+              height: signHeight,
+            ),
           ),
-          const Gap(20),
-          AnimatedSign(
-            imagePath: ImagePaths.sing2,
-            signHeight: signHeight,
-            delay: secondSignDelay,
+          Padding(
+            padding: Paddings.mediumBottom,
+            child: Image.asset(
+              ImagePaths.sing2,
+              height: signHeight,
+            ),
           ),
-          const Gap(20),
-          AnimatedSign(
-            imagePath: ImagePaths.sing3,
-            signHeight: signHeight,
-            delay: thirdSignDelay,
+          Padding(
+            padding: Paddings.mediumBottom,
+            child: Image.asset(
+              ImagePaths.sing3,
+              height: signHeight,
+            ),
           ),
-          const Gap(20),
-          AnimatedSign(
-            imagePath: ImagePaths.sing4,
-            signHeight: signHeight,
-            delay: fourthSignDelay,
+          Padding(
+            padding: Paddings.mediumBottom,
+            child: Image.asset(
+              ImagePaths.sing4,
+              height: signHeight,
+            ),
           ),
-          const Gap(20),
-          AnimatedSign(
-            imagePath: ImagePaths.sing5,
-            signHeight: signHeight,
-            delay: fifthSignDelay,
+          Image.asset(
+            ImagePaths.sing5,
+            height: signHeight,
           ),
-        ],
+        ]
+            .animate(
+              interval: interval,
+              delay: delay,
+            )
+            .slideX(
+              begin: 0.7,
+              end: 0,
+              delay: delay,
+              duration: slideDuration,
+              curve: Curves.easeIn,
+            )
+            .fadeIn(
+              delay: delay,
+              duration: fadeInDuration,
+            ),
       ),
     );
   }
