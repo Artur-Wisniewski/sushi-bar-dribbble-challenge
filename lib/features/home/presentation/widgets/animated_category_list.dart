@@ -74,11 +74,11 @@ class AnimatedCategoryList extends StatelessWidget {
   TextStyle _categoryTextStyle(BuildContext context, bool isCategoryPicked) {
     return isCategoryPicked
         ? Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
               fontWeight: FontWeight.bold,
             )
         : Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.onSecondary,
               fontWeight: FontWeight.bold,
             );
   }
