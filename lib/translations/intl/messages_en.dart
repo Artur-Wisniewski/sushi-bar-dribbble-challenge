@@ -27,7 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "aNew": MessageLookupByLibrary.simpleMessage("New"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "bookTable": MessageLookupByLibrary.simpleMessage("Book a table"),
+        "classicRamenSoupChicken": MessageLookupByLibrary.simpleMessage(
+            "Classic Ramen Soup with Chicken"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "crabSticksWithRice":
+            MessageLookupByLibrary.simpleMessage("Crab Sticks with Rice"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
         "decemberShort": MessageLookupByLibrary.simpleMessage("dec"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
@@ -44,16 +48,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderDelivery": MessageLookupByLibrary.simpleMessage("Order delivery"),
         "originalRamenWithHakataNoodles": MessageLookupByLibrary.simpleMessage(
             "Original Ramen with Hakata noodles"),
+        "pinkRamenShrimp":
+            MessageLookupByLibrary.simpleMessage("Pink Ramen with Shrimp"),
         "ramen": MessageLookupByLibrary.simpleMessage("Ramen"),
+        "ramenWithChicken":
+            MessageLookupByLibrary.simpleMessage("Ramen with Chicken"),
         "reserve": MessageLookupByLibrary.simpleMessage("Reserve"),
         "reserveTable": MessageLookupByLibrary.simpleMessage("Reserve a table"),
         "reserved": MessageLookupByLibrary.simpleMessage("Reserved"),
         "riceBowls": MessageLookupByLibrary.simpleMessage("Rice Bowls"),
+        "salmonPokeBowlAvocado": MessageLookupByLibrary.simpleMessage(
+            "Salmon Poke Bowl with Avocado"),
         "salmonSet": MessageLookupByLibrary.simpleMessage(
             "Salmon Set: sushi, simple roll, california roll"),
+        "salmonSushiRice":
+            MessageLookupByLibrary.simpleMessage("Salmon Sushi with Rice"),
         "sanFrancisco": MessageLookupByLibrary.simpleMessage("San Francisco"),
         "sets": MessageLookupByLibrary.simpleMessage("Sets"),
+        "spicyGyozaWithGarlic":
+            MessageLookupByLibrary.simpleMessage("Spicy Gyoza with Garlic"),
+        "sushiRiceSalmon":
+            MessageLookupByLibrary.simpleMessage("Sushi Rice with Salmon"),
         "sushiRolls": MessageLookupByLibrary.simpleMessage("Sushi and rolls"),
-        "time": MessageLookupByLibrary.simpleMessage("Time")
+        "sushiRollsRice":
+            MessageLookupByLibrary.simpleMessage("Sushi Rolls with Rice"),
+        "time": MessageLookupByLibrary.simpleMessage("Time"),
+        "vegetableSoup": MessageLookupByLibrary.simpleMessage("Vegetable Soup")
       };
 }

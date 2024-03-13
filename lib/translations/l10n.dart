@@ -170,6 +170,106 @@ class L10n {
     );
   }
 
+  /// `Spicy Gyoza with Garlic`
+  String get spicyGyozaWithGarlic {
+    return Intl.message(
+      'Spicy Gyoza with Garlic',
+      name: 'spicyGyozaWithGarlic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salmon Poke Bowl with Avocado`
+  String get salmonPokeBowlAvocado {
+    return Intl.message(
+      'Salmon Poke Bowl with Avocado',
+      name: 'salmonPokeBowlAvocado',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Classic Ramen Soup with Chicken`
+  String get classicRamenSoupChicken {
+    return Intl.message(
+      'Classic Ramen Soup with Chicken',
+      name: 'classicRamenSoupChicken',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pink Ramen with Shrimp`
+  String get pinkRamenShrimp {
+    return Intl.message(
+      'Pink Ramen with Shrimp',
+      name: 'pinkRamenShrimp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ramen with Chicken`
+  String get ramenWithChicken {
+    return Intl.message(
+      'Ramen with Chicken',
+      name: 'ramenWithChicken',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sushi Rice with Salmon`
+  String get sushiRiceSalmon {
+    return Intl.message(
+      'Sushi Rice with Salmon',
+      name: 'sushiRiceSalmon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sushi Rolls with Rice`
+  String get sushiRollsRice {
+    return Intl.message(
+      'Sushi Rolls with Rice',
+      name: 'sushiRollsRice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salmon Sushi with Rice`
+  String get salmonSushiRice {
+    return Intl.message(
+      'Salmon Sushi with Rice',
+      name: 'salmonSushiRice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crab Sticks with Rice`
+  String get crabSticksWithRice {
+    return Intl.message(
+      'Crab Sticks with Rice',
+      name: 'crabSticksWithRice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vegetable Soup`
+  String get vegetableSoup {
+    return Intl.message(
+      'Vegetable Soup',
+      name: 'vegetableSoup',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Rice Bowls`
   String get riceBowls {
     return Intl.message(
