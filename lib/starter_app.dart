@@ -1,12 +1,13 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter/material.dart';
 
 import 'core/styles/theme.dart';
 
@@ -44,6 +45,8 @@ class _StarterAppState extends State<StarterApp> {
           statusBarIconBrightness: Brightness.light,
         ),
         child: MaterialApp.router(
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
           theme: mainTheme,
           themeMode: ThemeMode.light,
           debugShowCheckedModeBanner: false,

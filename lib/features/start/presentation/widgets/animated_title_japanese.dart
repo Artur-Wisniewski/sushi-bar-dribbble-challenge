@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class TitleJapanese extends StatelessWidget {
-  const TitleJapanese({super.key, required this.height, required this.delay});
+  const TitleJapanese(
+      {super.key, required this.height, required this.delay, required this.interval, required this.animationDuration});
 
   final double height;
 
-  double get signHeight => height / 5 - ((4 * 20) / 5);
-
   final Duration delay;
 
-  Duration get fadeInDuration => 400.ms;
+  final Duration interval;
+  final Duration animationDuration;
 
-  Duration get slideDuration => 400.ms;
-
-  Duration get interval => 200.ms;
+  double get signHeight => height / 5 - ((4 * 20) / 5);
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +64,11 @@ class TitleJapanese extends StatelessWidget {
             .slideX(
               begin: 0.7,
               end: 0,
-              delay: delay,
-              duration: slideDuration,
+              duration: animationDuration,
               curve: Curves.easeIn,
             )
             .fadeIn(
-              delay: delay,
-              duration: fadeInDuration,
+              duration: animationDuration,
             ),
       ),
     );

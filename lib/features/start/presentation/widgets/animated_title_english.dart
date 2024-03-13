@@ -30,16 +30,14 @@ class AnimatedTitleEnglish extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
             group: textGroup,
           )
-              .animate()
+              .animate(delay: firstDelay)
               .fadeIn(
-                delay: firstDelay,
                 duration: fadeInDuration,
                 curve: Curves.easeIn,
               )
               .slideX(
                 begin: 1,
                 end: 0,
-                delay: firstDelay,
                 duration: slideInDuration,
                 curve: Curves.easeIn,
               ),
@@ -52,16 +50,14 @@ class AnimatedTitleEnglish extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
             group: textGroup,
           )
-              .animate()
+              .animate(delay: secondDelay)
               .fadeIn(
-                delay: secondDelay,
                 duration: fadeInDuration,
                 curve: Curves.easeIn,
               )
               .slideX(
                 begin: 1,
                 end: 0,
-                delay: secondDelay,
                 duration: slideInDuration,
                 curve: Curves.easeIn,
               ),

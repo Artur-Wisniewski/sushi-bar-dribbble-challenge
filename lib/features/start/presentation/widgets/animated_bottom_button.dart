@@ -28,6 +28,8 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
 
   Duration get slideInDuration => 300.ms;
 
+  bool isInitialized = false;
+
   @override
   void initState() {
     colorController = AnimationController(vsync: this, duration: 300.ms);
@@ -36,10 +38,14 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
 
   @override
   void didChangeDependencies() {
-    colorAnimation = ColorTween(
-      begin: Theme.of(context).primaryColor,
-      end: Theme.of(context).colorScheme.secondary,
-    ).animate(colorController);
+    if (!isInitialized) {
+      colorAnimation = ColorTween(
+        begin: Theme.of(context).primaryColor,
+        end: Theme.of(context).colorScheme.secondary,
+      ).animate(colorController);
+      isInitialized = true;
+    }
+
     super.didChangeDependencies();
   }
 
