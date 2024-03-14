@@ -61,10 +61,15 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    loadImage(context: context, imageUrl: ImagePaths.wavesBackground);
     _titleController = AnimationController(vsync: this);
     _noodlesController = AnimationController(vsync: this);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    loadImage(context: context, imageUrl: ImagePaths.wavesBackground);
+    super.didChangeDependencies();
   }
 
   @override

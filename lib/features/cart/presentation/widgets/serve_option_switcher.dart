@@ -10,11 +10,13 @@ class ServeOptionSwitcher extends StatefulWidget {
     required this.onSwitch,
     required this.initialOrderType,
     required this.exitAnimationController,
+    required this.animationDuration,
   });
 
   final Function(OrderType orderType) onSwitch;
   final AnimationController exitAnimationController;
   final OrderType initialOrderType;
+  final Duration animationDuration;
 
   @override
   State<ServeOptionSwitcher> createState() => _ServeOptionSwitcherState();
@@ -61,26 +63,26 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
     )
         .animate()
         .slideY(
-          duration: 750.ms,
+          duration: widget.animationDuration,
           begin: -0.2,
           end: 0,
           curve: Curves.easeInOutSine,
         )
         .fadeIn(
-          duration: 750.ms,
+          duration: widget.animationDuration,
         )
         .animate(
           controller: widget.exitAnimationController,
           autoPlay: false,
         )
         .slideY(
-          duration: 750.ms,
+          duration: widget.animationDuration,
           begin: 0.0,
           end: -0.2,
           curve: Curves.easeInOutSine,
         )
         .fadeOut(
-          duration: 750.ms,
+          duration: widget.animationDuration,
         );
   }
 

@@ -1,3 +1,5 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/animated_order_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/ordered_dishes_list.dart';
@@ -7,7 +9,6 @@ import 'package:dribbble_sushi_bar_challenge/setup/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class CartView extends StatefulWidget {
@@ -18,39 +19,80 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> with TickerProviderStateMixin {
-  Duration calculateAnimatedOrderButtonDelay(int numberOfDifferentOrderedDishes) =>
-      250.ms + (numberOfDifferentOrderedDishes > 0 ? ((150.ms * numberOfDifferentOrderedDishes.clamp(0, 3))) : 0.ms);
+  Duration get dishCardAnimationDuration => 150.ms;
+
+  Duration get tabAnimationDuration => 750.ms;
+
+  Duration get orderedDishesListAnimationDelay => 250.ms;
+
+  Duration get bottomBarAnimationDelay => 250.ms;
 
   late final AnimationController _exitAnimationController = AnimationController(vsync: this);
 
   @override
+  void initState() {
+    super.initState();
+    _exitAnimationController.addStatusListener(_onExitAnimationStatusChange);
+  }
+
+  Future<void> _onExitAnimationStatusChange(AnimationStatus status) async {
+    if (status == AnimationStatus.completed) {
+      if(context.read<BottomBarNavigationCubit>().state.isNavigatedOutsideShell){
+        await context.push(RoutesPaths.bookTable);
+        _exitAnimationController.reverse();
+      }
+    }
+  }
+
+  Duration _calculateAnimatedOrderButtonDelay(int numberOfDifferentOrderedDishes) {
+    if (numberOfDifferentOrderedDishes > 0) {
+      return tabAnimationDuration + ((dishCardAnimationDuration * numberOfDifferentOrderedDishes.clamp(1, 3)));
+    }
+    return tabAnimationDuration;
+  }
+
+  Future<void> _onOrderButton(ShoppingCartState state) async {
+    if (state.orderType == OrderType.table) {
+      _exitAnimationController.forward();
+      Future.delayed(bottomBarAnimationDelay, () {
+        context.read<BottomBarNavigationCubit>().markNavigateOutsideShell(true);
+      });
+    }
+  }
+
+  void _onBottomBarChange(context, state) {
+    if (state.currentItem != BottomBarItems.cart) {
+      _exitAnimationController.forward();
+    }
+  }
+
+  void _onServeOptionSwitch(OrderType orderType) {
+    context.read<ShoppingCartCubit>().changeOrderType(orderType);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<BottomBarNavigationCubit, BottomBarNavigationState>(
-      listener: (context, state) {
-        if (state.currentItem != BottomBarItems.cart) {
-          _exitAnimationController.forward();
-        }
-      },
+      listener: _onBottomBarChange,
       child: SafeArea(
         child: Column(
           children: [
-            const Gap(16),
+            Gaps.medium,
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              padding: Paddings.mediumAllBottomNone,
               child: ServeOptionSwitcher(
-                onSwitch: (OrderType orderType) {
-                  context.read<ShoppingCartCubit>().changeOrderType(orderType);
-                },
+                onSwitch: _onServeOptionSwitch,
                 exitAnimationController: _exitAnimationController,
                 initialOrderType: context.read<ShoppingCartCubit>().state.orderType,
+                animationDuration: tabAnimationDuration,
               ),
             ),
-            const Gap(32),
+            Gaps.big,
             Expanded(
               child: Stack(
                 children: [
                   OrderedDishesList(
-                    animationDelay: 250.ms,
+                    animationDelay: orderedDishesListAnimationDelay,
                     exitAnimationController: _exitAnimationController,
                   ),
                   Positioned(
@@ -60,24 +102,10 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
                       builder: (context, state) {
                         return AnimatedOrderButton(
                           totalCost: state.totalCost,
-                          animationDelay: calculateAnimatedOrderButtonDelay(2),
+                          animationDelay: _calculateAnimatedOrderButtonDelay(2),
                           orderType: state.orderType,
                           exitAnimationController: _exitAnimationController,
-                          onTap: () {
-                            if (state.orderType == OrderType.table) {
-                              _exitAnimationController.forward();
-                              Future.delayed(250.ms, () {
-                                context.read<BottomBarNavigationCubit>().markNavigateOutsideShell(true);
-                              });
-                              Future.delayed(
-                                800.ms,
-                                () async {
-                                  await context.push(RoutesPaths.bookTable);
-                                  _exitAnimationController.reverse();
-                                },
-                              );
-                            }
-                          },
+                          onTap: () => _onOrderButton(state),
                         );
                       },
                     ),
@@ -94,6 +122,7 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
   @override
   dispose() {
     _exitAnimationController.dispose();
+    _exitAnimationController.removeStatusListener(_onExitAnimationStatusChange);
     super.dispose();
   }
 }
