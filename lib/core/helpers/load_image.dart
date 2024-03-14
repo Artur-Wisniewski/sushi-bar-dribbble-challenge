@@ -4,9 +4,5 @@ Future<void> loadImage({
   required BuildContext context,
   required String imageUrl,
 }) async {
-  try {
-    await precacheImage(AssetImage(imageUrl), context);
-  } catch (e) {
-    //TODO
-  }
+  await precacheImage(AssetImage(imageUrl), context);
 }
