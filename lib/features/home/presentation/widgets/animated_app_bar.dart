@@ -1,7 +1,7 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gap/gap.dart';
 
 class AnimatedAppBar extends StatelessWidget {
   const AnimatedAppBar({
@@ -24,10 +24,10 @@ class AnimatedAppBar extends StatelessWidget {
               'San Francisco',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const Gap(8),
-            const Icon(
+            Gaps.small,
+            Icon(
               Icons.keyboard_arrow_down_rounded,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.secondary,
               size: 28,
             )
           ],

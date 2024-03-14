@@ -4,7 +4,7 @@ import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presenta
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/category.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/dishes_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/animated_app_bar.dart';
-import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/animated_category_list.dart';
+import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/animated_category_list/animated_category_list.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/dish_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -98,52 +98,55 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                     ),
                     Gaps.medium,
                     Expanded(
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        padding: Paddings.mediumHorizontal,
-                        scrollDirection: Axis.horizontal,
-                        child: BlocConsumer<DishesCubit, DishesState>(
-                          bloc: dishesCubit,
-                          listenWhen: (previous, current) => previous.currentCategory != current.currentCategory,
-                          listener: (context, state) {
-                            final index = state.dishes.indexWhere((dish) => dish.category == state.currentCategory);
-                            scrollController.animateTo(
-                              index * (cardDishWidth + paddingBetweenCards),
-                              duration: scrollAnimationDuration,
-                              curve: Curves.easeInOut,
-                            );
-                          },
-                          builder: (context, state) {
-                            return Row(
-                              children: List.generate(
-                                state.dishes.length,
-                                (index) {
-                                  return Padding(
-                                    padding: Paddings.mediumRight,
-                                    child: DishCard(
-                                      dish: state.dishes[index],
-                                      scrollController: scrollController,
-                                      cardDishWidth: cardDishWidth,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        final cardDishWidth = constraints.maxHeight / 2.2;
+                        return SingleChildScrollView(
+                          controller: scrollController,
+                          padding: Paddings.mediumHorizontal,
+                          scrollDirection: Axis.horizontal,
+                          child: BlocConsumer<DishesCubit, DishesState>(
+                            bloc: dishesCubit,
+                            listenWhen: (previous, current) => previous.currentCategory != current.currentCategory,
+                            listener: (context, state) {
+                              final index = state.dishes.indexWhere((dish) => dish.category == state.currentCategory);
+                              scrollController.animateTo(
+                                index * (cardDishWidth + paddingBetweenCards),
+                                duration: scrollAnimationDuration,
+                                curve: Curves.easeInOut,
+                              );
+                            },
+                            builder: (context, state) {
+                              return Row(
+                                children: List.generate(
+                                  state.dishes.length,
+                                  (index) {
+                                    return Padding(
+                                      padding: Paddings.mediumRight,
+                                      child: DishCard(
+                                        dish: state.dishes[index],
+                                        scrollController: scrollController,
+                                        cardDishWidth: cardDishWidth,
+                                      ),
+                                    );
+                                  },
+                                )
+                                    .animate(
+                                      delay: dishCardAnimationDelay,
+                                      interval: dishCardAnimationInterval,
+                                    )
+                                    .fadeIn(
+                                      duration: dishCardAnimationDuration,
+                                    )
+                                    .slideX(
+                                      begin: 0.05,
+                                      end: 0,
+                                      duration: dishCardAnimationDuration,
                                     ),
-                                  );
-                                },
-                              )
-                                  .animate(
-                                    delay: dishCardAnimationDelay,
-                                    interval: dishCardAnimationInterval,
-                                  )
-                                  .fadeIn(
-                                    duration: dishCardAnimationDuration,
-                                  )
-                                  .slideX(
-                                    begin: 0.05,
-                                    end: 0,
-                                    duration: dishCardAnimationDuration,
-                                  ),
-                            );
-                          },
-                        ),
-                      ),
+                              );
+                            },
+                          ),
+                        );
+                      }),
                     ),
                   ],
                 ),
