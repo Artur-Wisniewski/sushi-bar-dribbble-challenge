@@ -1,3 +1,5 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/cart/presentation/widgets/ordered_dish_card.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,13 @@ class OrderedDishesList extends StatelessWidget {
     super.key,
     required this.animationDelay,
     required this.exitAnimationController,
+    required this.animationInterval,
+    required this.animationDuration,
   });
 
   final Duration animationDelay;
+  final Duration animationInterval;
+  final Duration animationDuration;
   final AnimationController exitAnimationController;
 
   @override
@@ -22,12 +28,12 @@ class OrderedDishesList extends StatelessWidget {
         builder: (context, state) {
           return ListView(
             shrinkWrap: true,
-            padding: const EdgeInsets.only(bottom: 100, left: 16, right: 16),
+            padding: Paddings.listPadding,
             children: List.generate(state.order.length, (index) {
               final dish = state.order.keys.elementAt(index);
               final quantity = state.order[dish]!;
               return Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: Paddings.mediumBottom,
                 child: OrderedDishCard(
                   dish: dish,
                   quantity: quantity,
@@ -35,17 +41,17 @@ class OrderedDishesList extends StatelessWidget {
               );
             })
                 .animate(
-                  interval: 150.ms,
+                  interval: animationInterval,
                   delay: animationDelay,
                 )
                 .fadeIn(
-                  duration: 600.ms,
+                  duration: animationDuration,
                   curve: Curves.easeInOutSine,
                 )
                 .slideX(
                   begin: 0.05,
                   end: 0,
-                  duration: 600.ms,
+                  duration: animationDuration,
                   curve: Curves.easeInOutSine,
                 ),
           );
@@ -59,11 +65,11 @@ class OrderedDishesList extends StatelessWidget {
         .slideX(
           begin: 0,
           end: -0.1,
-          duration: 600.ms,
+          duration: animationDuration,
           curve: Curves.easeInOutSine,
         )
         .fadeOut(
-          duration: 600.ms,
+          duration: animationDuration,
           curve: Curves.easeInOutSine,
         );
   }
@@ -74,10 +80,10 @@ class _OrderedDishesListClipper extends CustomClipper<RRect> {
   RRect getClip(Size size) {
     return RRect.fromRectAndCorners(
       Rect.fromLTWH(16, 0, size.width - 32, size.height),
-      topLeft: const Radius.circular(20),
-      topRight: const Radius.circular(20),
-      bottomLeft: const Radius.circular(36),
-      bottomRight: const Radius.circular(36),
+      topLeft: Radii.medium,
+      topRight: Radii.medium,
+      bottomLeft: Radii.big,
+      bottomRight: Radii.big,
     );
   }
 

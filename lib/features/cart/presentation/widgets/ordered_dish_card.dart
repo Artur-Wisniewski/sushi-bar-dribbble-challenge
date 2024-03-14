@@ -1,10 +1,12 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/count_picker.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/text_swapper.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/dish.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class OrderedDishCard extends StatelessWidget {
   const OrderedDishCard({super.key, required this.dish, required this.quantity});
@@ -15,10 +17,10 @@ class OrderedDishCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: Paddings.mediumAll,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadii.medium,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +31,7 @@ class OrderedDishCard extends StatelessWidget {
               widthFactor: 1,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(500),
+                  borderRadius: BorderRadii.circular,
                   boxShadow: kElevationToShadow[4],
                 ),
                 child: Image.asset(
@@ -39,17 +41,18 @@ class OrderedDishCard extends StatelessWidget {
               ),
             ),
           ),
-          const Gap(24),
+          Gaps.big,
           Flexible(
             flex: 5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(dish.name, style: Theme.of(context).textTheme.titleMedium),
-                const Gap(8),
+                Text(
+                  dish.name,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                Gaps.small,
                 Row(
-                  // runSpacing: 8,
-                  // alignment: WrapAlignment.spaceBetween,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

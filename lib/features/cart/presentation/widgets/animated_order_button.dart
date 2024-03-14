@@ -15,6 +15,7 @@ class AnimatedOrderButton extends StatefulWidget {
     required this.orderType,
     required this.onTap,
     required this.exitAnimationController,
+    required this.animationDuration,
   });
 
   final Duration animationDelay;
@@ -22,6 +23,7 @@ class AnimatedOrderButton extends StatefulWidget {
   final OrderType orderType;
   final VoidCallback onTap;
   final AnimationController exitAnimationController;
+  final Duration animationDuration;
 
   @override
   State<AnimatedOrderButton> createState() => _AnimatedOrderButtonState();
@@ -32,61 +34,67 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
 
   @override
   void initState() {
-    widget.exitAnimationController.addStatusListener((status) {
-      if (status == AnimationStatus.forward) {
-        _entryAnimationController.reverse();
-      }
-      if (status == AnimationStatus.reverse) {
-        _entryAnimationController.forward();
-      }
-    });
+    widget.exitAnimationController.addStatusListener(onExitAnimationStatusChange);
     super.initState();
+  }
+
+  void onExitAnimationStatusChange(status) {
+    if (status == AnimationStatus.forward) {
+      _entryAnimationController.reverse();
+    }
+    if (status == AnimationStatus.reverse) {
+      _entryAnimationController.forward();
+    }
+  }
+
+  void onTap() {
+    _entryAnimationController.reverse();
+    widget.onTap();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          _entryAnimationController.reverse();
-          widget.onTap();
-        },
-        child: Container(
-          alignment: Alignment.center,
-          height: Sizes.bottomBarHeight,
-          padding: Paddings.mediumAll,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadii.circular,
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        height: Sizes.bottomBarHeight,
+        padding: Paddings.mediumAll,
+        margin: Paddings.mediumHorizontal,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadii.circular,
+        ),
+        child: TextSwapper(
+          text: widget.orderType.isDelivery
+              ? '${L10n.current.order} \$${widget.totalCost.toStringAsFixed(0)}'
+              : L10n.current.bookTable,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.secondary),
+        ),
+      )
+          .animate(
+            controller: _entryAnimationController,
+            delay: widget.animationDelay,
+          )
+          .scaleXY(
+            begin: 0.5,
+            end: 1,
+            duration: widget.animationDuration,
+            curve: Curves.ease,
+          )
+          .slideY(
+            begin: 1.23,
+            end: 0,
+            duration: widget.animationDuration,
+            curve: Curves.ease,
           ),
-          child: TextSwapper(
-            text: widget.orderType.isDelivery
-                ? '${L10n.current.order} \$${widget.totalCost.toStringAsFixed(0)}'
-                : L10n.current.bookTable,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.secondary),
-          ),
-        )
-            .animate(
-              controller: _entryAnimationController,
-              delay: widget.animationDelay,
-            )
-            .scaleXY(
-              begin: 0.5,
-              end: 1,
-              duration: 750.ms,
-              curve: Curves.ease,
-            )
-            .slideY(
-              begin: 1.23,
-              end: 0,
-              duration: 750.ms,
-              curve: Curves.ease,
-            ));
+    );
   }
 
   @override
   dispose() {
     _entryAnimationController.dispose();
+    _entryAnimationController.removeStatusListener(onExitAnimationStatusChange);
     super.dispose();
   }
 }

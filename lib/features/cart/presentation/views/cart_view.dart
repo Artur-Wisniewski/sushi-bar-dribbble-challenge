@@ -19,13 +19,17 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> with TickerProviderStateMixin {
-  Duration get dishCardAnimationDuration => 150.ms;
-
   Duration get tabAnimationDuration => 750.ms;
 
   Duration get orderedDishesListAnimationDelay => 250.ms;
 
   Duration get bottomBarAnimationDelay => 250.ms;
+
+  Duration get exitAnimationDuration => 750.ms;
+
+  Duration get orderedDishesListAnimationInterval => 150.ms;
+
+  Duration get orderedDishesListAnimationDuration => 600.ms;
 
   late final AnimationController _exitAnimationController = AnimationController(vsync: this);
 
@@ -37,7 +41,7 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
 
   Future<void> _onExitAnimationStatusChange(AnimationStatus status) async {
     if (status == AnimationStatus.completed) {
-      if(context.read<BottomBarNavigationCubit>().state.isNavigatedOutsideShell){
+      if (context.read<BottomBarNavigationCubit>().state.isNavigatedOutsideShell) {
         await context.push(RoutesPaths.bookTable);
         _exitAnimationController.reverse();
       }
@@ -46,9 +50,10 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
 
   Duration _calculateAnimatedOrderButtonDelay(int numberOfDifferentOrderedDishes) {
     if (numberOfDifferentOrderedDishes > 0) {
-      return tabAnimationDuration + ((dishCardAnimationDuration * numberOfDifferentOrderedDishes.clamp(1, 3)));
+      return orderedDishesListAnimationDelay +
+          ((orderedDishesListAnimationInterval * numberOfDifferentOrderedDishes.clamp(1, 3)));
     }
-    return tabAnimationDuration;
+    return orderedDishesListAnimationDelay;
   }
 
   Future<void> _onOrderButton(ShoppingCartState state) async {
@@ -94,6 +99,8 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
                   OrderedDishesList(
                     animationDelay: orderedDishesListAnimationDelay,
                     exitAnimationController: _exitAnimationController,
+                    animationInterval: orderedDishesListAnimationInterval,
+                    animationDuration: orderedDishesListAnimationDuration,
                   ),
                   Positioned(
                     bottom: 0,
@@ -102,10 +109,11 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
                       builder: (context, state) {
                         return AnimatedOrderButton(
                           totalCost: state.totalCost,
-                          animationDelay: _calculateAnimatedOrderButtonDelay(2),
+                          animationDelay: _calculateAnimatedOrderButtonDelay(state.order.length),
                           orderType: state.orderType,
                           exitAnimationController: _exitAnimationController,
                           onTap: () => _onOrderButton(state),
+                          animationDuration: exitAnimationDuration,
                         );
                       },
                     ),

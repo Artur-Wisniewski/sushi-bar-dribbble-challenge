@@ -1,4 +1,5 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/shopping_cart_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
@@ -32,14 +33,16 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
       vsync: this,
       initialIndex: widget.initialOrderType == OrderType.delivery ? 0 : 1,
     );
-    _tabController.addListener(() {
-      if (_tabController.index == 0) {
-        widget.onSwitch(OrderType.delivery);
-      } else {
-        widget.onSwitch(OrderType.table);
-      }
-    });
+    _tabController.addListener(onTabChange);
     super.initState();
+  }
+
+  void onTabChange() {
+    if (_tabController.index == 0) {
+      widget.onSwitch(OrderType.delivery);
+    } else {
+      widget.onSwitch(OrderType.table);
+    }
   }
 
   @override
@@ -51,14 +54,10 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
       tabTextColor: Theme.of(context).colorScheme.onSecondary,
       selectedTabTextColor: Theme.of(context).colorScheme.secondary,
       textStyle: Theme.of(context).textTheme.bodyMedium,
-      indicatorPadding: const EdgeInsets.all(4),
+      indicatorPadding: Paddings.tinyAll,
       tabs: [
-        SegmentTab(
-          label: L10n.current.orderDelivery,
-        ),
-        SegmentTab(
-          label: L10n.current.inTheRestaurant,
-        ),
+        SegmentTab(label: L10n.current.orderDelivery),
+        SegmentTab(label: L10n.current.inTheRestaurant),
       ],
     )
         .animate()
@@ -88,6 +87,7 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
 
   @override
   void dispose() {
+    _tabController.removeListener(onTabChange);
     _tabController.dispose();
     super.dispose();
   }
