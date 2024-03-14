@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "gyoza": MessageLookupByLibrary.simpleMessage("Gyoza"),
         "inTheRestaurant":
             MessageLookupByLibrary.simpleMessage("In the restaurant"),
+        "japaneseRestaurant":
+            MessageLookupByLibrary.simpleMessage("Japanese restaurant"),
         "kaniSyake": MessageLookupByLibrary.simpleMessage(
             "Kani syake roll with shrimp and surimi"),
         "numberOfGuests":

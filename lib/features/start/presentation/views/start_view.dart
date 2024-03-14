@@ -24,6 +24,16 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
   late final AnimationController _titleController;
   late final AnimationController _noodlesController;
 
+  Duration get screenFadeInDuration => 300.ms;
+
+  Duration get noodleAppearDuration => 500.ms;
+
+  Duration get noodleAppearDelay => 200.ms;
+
+  Duration get disappearAnimationDuration => 900.ms;
+
+  Duration get buttonAnimationDelay => 400.ms;
+
   double get noodleAnimationSize => MediaQuery.of(context).size.height * 1.00;
 
   double get noodleAnimationXOffset => MediaQuery.of(context).size.width * -0.25;
@@ -39,7 +49,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
 
   double get signColumnYOffset => MediaQuery.of(context).size.height * 0.26;
 
-  Duration get englishTitleDelay => 500.ms;
+  Duration get englishTitleDelay => 500.ms + noodleAppearDelay;
 
   Duration get japaneseTitleDelay => englishTitleDelay + 600.ms;
 
@@ -50,10 +60,11 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
   Duration get japaneseLetterAnimationDuration => 400.ms;
 
   @override
-  void dispose() {
-    _titleController.dispose();
-    _noodlesController.dispose();
-    super.dispose();
+  void initState() {
+    loadImage(context: context, imageUrl: ImagePaths.wavesBackground);
+    _titleController = AnimationController(vsync: this);
+    _noodlesController = AnimationController(vsync: this);
+    super.initState();
   }
 
   @override
@@ -85,14 +96,14 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
                 )
                     .animate()
                     .fadeIn(
-                      duration: 500.ms,
-                      delay: 200.ms,
+                      duration: noodleAppearDuration,
+                      delay: noodleAppearDelay,
                     )
                     .slideY(
                       begin: 0.03,
                       end: 0,
-                      duration: 500.ms,
-                      delay: 200.ms,
+                      duration: noodleAppearDuration,
+                      delay: noodleAppearDelay,
                     ),
               ),
             )
@@ -103,7 +114,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
                 .slideX(
                   begin: 0,
                   end: -1,
-                  duration: 900.ms,
+                  duration: disappearAnimationDuration,
                 ),
             Positioned(
               right: 50,
@@ -123,11 +134,11 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
                 .slideX(
                   begin: 0.00,
                   end: 3,
-                  duration: 900.ms,
+                  duration: disappearAnimationDuration,
                 ),
           ],
         ),
-      ).animate().fadeIn(duration: 300.ms),
+      ).animate().fadeIn(duration: screenFadeInDuration),
       bottomNavigationBar: Padding(
         padding: Paddings.mediumAllBottomBig,
         child: AnimatedBottomButton(
@@ -135,7 +146,10 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
           onPressed: () {
             _titleController.forward();
             _noodlesController.forward();
-            Future.delayed(400.ms, () => context.go(RoutesPaths.home));
+            Future.delayed(
+              buttonAnimationDelay,
+              () => context.go(RoutesPaths.home),
+            );
           },
         ),
       ),
@@ -143,10 +157,9 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
   }
 
   @override
-  void initState() {
-    loadImage(context: context, imageUrl: ImagePaths.wavesBackground);
-    _titleController = AnimationController(vsync: this);
-    _noodlesController = AnimationController(vsync: this);
-    super.initState();
+  void dispose() {
+    _titleController.dispose();
+    _noodlesController.dispose();
+    super.dispose();
   }
 }

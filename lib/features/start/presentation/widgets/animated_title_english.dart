@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -26,7 +27,7 @@ class AnimatedTitleEnglish extends StatelessWidget {
         Expanded(
           flex: 8,
           child: AutoSizeText(
-            'Japanese'.split('').join('\n').toString(),
+            L10n.current.japaneseRestaurant.split(' ')[0].split('').join('\n').toString(),
             style: Theme.of(context).textTheme.titleLarge,
             group: textGroup,
           )
@@ -46,7 +47,7 @@ class AnimatedTitleEnglish extends StatelessWidget {
         Expanded(
           flex: 10,
           child: AutoSizeText(
-            'restaurant'.split('').join('\n').toString(),
+            L10n.current.japaneseRestaurant.split(' ')[1].split('').join('\n').toString(),
             style: Theme.of(context).textTheme.titleLarge,
             group: textGroup,
           )

@@ -32,7 +32,7 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
 
   @override
   void initState() {
-    colorController = AnimationController(vsync: this, duration: 300.ms);
+    colorController = AnimationController(vsync: this, duration: slideInDuration);
     super.initState();
   }
 
@@ -45,14 +45,7 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
       ).animate(colorController);
       isInitialized = true;
     }
-
     super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    colorController.dispose();
-    super.dispose();
   }
 
   @override
@@ -95,5 +88,11 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> with Ticker
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    colorController.dispose();
+    super.dispose();
   }
 }

@@ -409,6 +409,16 @@ class L10n {
       args: [],
     );
   }
+
+  /// `Japanese restaurant`
+  String get japaneseRestaurant {
+    return Intl.message(
+      'Japanese restaurant',
+      name: 'japaneseRestaurant',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

@@ -14,7 +14,10 @@ class TitleJapanese extends StatelessWidget {
   final Duration interval;
   final Duration animationDuration;
 
-  double get signHeight => height / 5 - ((4 * 20) / 5);
+  final int numberOfSigns = 5;
+
+  double get signHeight =>
+      height / numberOfSigns - (((numberOfSigns - 1) * Paddings.mediumBottom.bottom) / numberOfSigns);
 
   @override
   Widget build(BuildContext context) {
