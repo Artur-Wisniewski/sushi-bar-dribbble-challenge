@@ -1,12 +1,15 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class DaySection extends StatelessWidget {
-  const DaySection({super.key, required this.bookTableCubit});
+  const DaySection({super.key, required this.bookTableCubit, required this.switchAnimationDuration});
+
+  final Duration switchAnimationDuration;
 
   final BookTableCubit bookTableCubit;
 
@@ -18,13 +21,13 @@ class DaySection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20), //TODO use paddings
+          padding: Paddings.mediumHorizontal,
           child: Text(
             L10n.current.day,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
           ),
         ),
-        const Gap(12),
+        Gaps.medium,
         BlocBuilder<BookTableCubit, BookTableState>(
           bloc: bookTableCubit,
           buildWhen: (previous, current) => previous.day != current.day,
@@ -34,7 +37,7 @@ class DaySection extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 20), //TODO use paddings
+                padding: Paddings.mediumHorizontal,
                 children: List.generate(31, (index) {
                   final day = '${index + 1} ${L10n.current.decemberShort}';
                   bool isPicked = day == state.day;
@@ -49,7 +52,7 @@ class DaySection extends StatelessWidget {
                   return GestureDetector(
                     onTap: () => bookTableCubit.pickDay(day),
                     child: AnimatedContainer(
-                      duration: 200.ms,
+                      duration: switchAnimationDuration,
                       margin: const EdgeInsets.only(right: 10), //TODO use paddings
                       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10), //TODO use paddings
                       decoration: BoxDecoration(

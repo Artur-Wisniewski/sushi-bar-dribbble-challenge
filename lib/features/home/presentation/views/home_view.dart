@@ -18,8 +18,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  // TODO add more responsive UI
-
   final DishesCubit dishesCubit = DishesCubit();
 
   late final AnimationController animationOutController;

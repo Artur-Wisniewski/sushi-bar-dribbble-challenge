@@ -1,3 +1,5 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/round_button.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/text_swapper.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
@@ -15,13 +17,13 @@ class NumberOfGuestsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0), //TODO use paddings
+      padding: Paddings.mediumHorizontal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(L10n.current.numberOfGuests,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black)),
-          const Gap(20), //TODO use paddings
+          Gaps.medium,
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10), //TODO use paddings
             decoration: BoxDecoration(

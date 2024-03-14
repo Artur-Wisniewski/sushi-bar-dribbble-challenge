@@ -14,7 +14,9 @@ class Paddings {
   static const mediumRight = EdgeInsets.only(right: medium);
   static const mediumHorizontal = EdgeInsets.symmetric(horizontal: medium);
   static const mediumAllBottomBig = EdgeInsets.fromLTRB(medium, medium, medium, big);
+  static const mediumAllBottomSmall = EdgeInsets.fromLTRB(medium, medium, medium, small);
   static const mediumAllBottomNone = EdgeInsets.fromLTRB(medium, medium, medium, 0);
+  static const mediumHorizontalSmallVertical = EdgeInsets.symmetric(horizontal: medium, vertical: small);
   static const listPadding = EdgeInsets.fromLTRB(medium, 0, medium, large);
 
 }

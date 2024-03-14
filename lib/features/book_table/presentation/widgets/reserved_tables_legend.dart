@@ -1,8 +1,10 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
+import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/reserved_table_legend_item.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gap/gap.dart';
 
 class ReservedTablesLegend extends StatelessWidget {
   const ReservedTablesLegend({super.key, this.animationDelay = const Duration(milliseconds: 500)});
@@ -14,14 +16,14 @@ class ReservedTablesLegend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 16, 16, 8),
+      padding: Paddings.mediumAllBottomSmall,
       child: Row(
         children: [
           ReservedTableLegendItem(
             label: L10n.current.reserved,
-            color: const Color(0xFF404e9a), //TODO use theme
+            color: AppColors.indigo,
           ),
-          const Gap(16),
+          Gaps.medium,
           ReservedTableLegendItem(
             label: L10n.current.free,
             color: Theme.of(context).colorScheme.secondary,

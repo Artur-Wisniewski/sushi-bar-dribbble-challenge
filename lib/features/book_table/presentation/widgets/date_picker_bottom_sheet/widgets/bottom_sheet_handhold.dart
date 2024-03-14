@@ -1,3 +1,5 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
+import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetHandhold extends StatelessWidget {
@@ -10,9 +12,9 @@ class BottomSheetHandhold extends StatelessWidget {
         width: 50,
         height: 5,
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.grey[300], //TODO use theme
-          borderRadius: BorderRadius.circular(40),
+        decoration: const BoxDecoration(
+          color: AppColors.greyLight2,
+          borderRadius: BorderRadii.circular,
         ),
       ),
     );

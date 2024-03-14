@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/images_paths.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/core/styles/colors.dart';
@@ -29,9 +30,15 @@ class BookTableView extends StatefulWidget {
 class _BookTableViewState extends State<BookTableView> with SingleTickerProviderStateMixin {
   final ValueNotifier<(int, int)?> pickedTableNotifier = ValueNotifier(null);
   late final AnimationController _blurAnimationController = AnimationController(
-    duration: 500.ms,
+    duration: blurAnimationDuration,
     vsync: this,
   );
+
+  Duration get blurAnimationDuration => 500.ms;
+
+  Duration get reservedTablesLegendAnimationDuration => 500.ms;
+
+  Duration get animatedAppBarDuration => 500.ms;
 
   final BookTableCubit bookTableCubit = BookTableCubit();
 
@@ -49,8 +56,8 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
       secondAnimation: _blurAnimationController,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radii.medium,
+          topRight: Radii.medium,
         ),
       ),
       builder: (context) => DatePickerBottomSheet(bookTableCubit: bookTableCubit),
@@ -64,23 +71,25 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
         PopScope(
           canPop: false,
           onPopInvoked: (bool didPop) {
-            //onPopInvoked();
+            onPopInvoked();
           },
           child: Scaffold(
             extendBody: true,
             extendBodyBehindAppBar: true,
-            appBar: AnimatedAppBar(onLeadingButton: onPopInvoked),
+            appBar: AnimatedAppBar(
+              onLeadingButton: onPopInvoked,
+              animationDuration: animatedAppBarDuration,
+            ),
             bottomNavigationBar: Padding(
               padding: Paddings.mediumAllBottomBig,
               child: AnimatedBuilder(
-                  animation: pickedTableNotifier,
-                  builder: (context, child) {
-                    return AnimatedBottomButton(
-                      label: L10n.current.reserve,
-                      isEnabled: pickedTableNotifier.value != null,
-                      onPressed: onReserve,
-                    );
-                  }),
+                animation: pickedTableNotifier,
+                builder: (context, child) => AnimatedBottomButton(
+                  label: L10n.current.reserve,
+                  isEnabled: pickedTableNotifier.value != null,
+                  onPressed: onReserve,
+                ),
+              ),
             ),
             body: Container(
               decoration: const BoxDecoration(
@@ -96,7 +105,7 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
                     Expanded(
                       child: ReservableTablesGrid(pickedTableNotifier: pickedTableNotifier),
                     ),
-                    ReservedTablesLegend(animationDelay: 500.ms)
+                    ReservedTablesLegend(animationDelay: reservedTablesLegendAnimationDuration)
                   ],
                 ),
               ),

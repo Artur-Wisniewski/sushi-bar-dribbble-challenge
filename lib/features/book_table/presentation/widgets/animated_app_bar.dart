@@ -1,19 +1,20 @@
 // appBar: ,
 
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
 import 'package:dribbble_sushi_bar_challenge/core/widgets/round_button.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gap/gap.dart';
 
 class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const AnimatedAppBar({super.key, required this.onLeadingButton});
+  const AnimatedAppBar({super.key, required this.onLeadingButton, required this.animationDuration});
 
   static const paddingLeft = 16.0;
   static const height = 70.0;
   static const backButtonWidth = 44.0;
 
   final VoidCallback onLeadingButton;
+  final Duration animationDuration;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +29,12 @@ class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
       )
           .animate()
           .fadeIn(
-            duration: 500.ms,
+            duration: animationDuration,
           )
           .slideY(
             begin: -0.4,
             end: 0,
-            duration: 500.ms,
+            duration: animationDuration,
             curve: Curves.easeInOutSine,
           ),
       centerTitle: true,
@@ -41,19 +42,19 @@ class AnimatedAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: paddingLeft + backButtonWidth,
       leading: Row(
         children: [
-          const Gap(paddingLeft),
+          Gaps.medium,
           RoundIconButton.primary(
             icon: Icons.arrow_back,
             onPressed: onLeadingButton,
           )
               .animate()
               .fadeIn(
-                duration: 500.ms,
+                duration: animationDuration,
               )
               .slideX(
                 begin: -0.4,
                 end: 0,
-                duration: 500.ms,
+                duration: animationDuration,
                 curve: Curves.easeInOutSine,
               ),
         ],
