@@ -1,3 +1,4 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/category.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/presentation/managers/dishes_cubit.dart';
@@ -17,7 +18,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  // TODO check all paddings in the app
+  // TODO add more responsive UI
 
   final DishesCubit dishesCubit = DishesCubit();
 
@@ -28,7 +29,23 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
   double get cardDishWidth => MediaQuery.of(context).size.width * 2 / 3;
 
-  static const double paddingBetweenCards = 20;
+  double get paddingBetweenCards => Paddings.medium;
+
+  Duration get appBarAnimationDuration => 750.ms;
+
+  Duration get categoryAnimationDelay => 100.ms;
+
+  Duration get categoryAnimationDuration => 750.ms;
+
+  Duration get scrollAnimationDuration => 500.ms;
+
+  Duration get dishCardAnimationDuration => 700.ms;
+
+  Duration get dishCardAnimationInterval => 250.ms;
+
+  Duration get dishCardAnimationDelay => categoryAnimationDelay + categoryAnimationDuration - 100.ms;
+
+  Duration get exitAnimationDuration => 750.ms;
 
   @override
   void initState() {
@@ -36,7 +53,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     animationOutController = AnimationController(vsync: this);
     appBarAnimationController = AnimationController(
       vsync: this,
-      duration: 750.ms,
+      duration: appBarAnimationDuration,
     );
     appBarAnimationController.forward();
     dishesCubit.init();
@@ -56,11 +73,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         child: SafeArea(
           child: Column(
             children: [
-              const Gap(16),
+              const Gap(16), //TODO
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: Paddings.mediumHorizontal,
                 child: AnimatedAppBar(
-                  appBarPlayDuration: 750.ms,
+                  appBarPlayDuration: appBarAnimationDuration,
                   appBarAnimationController: appBarAnimationController,
                 ),
               ),
@@ -72,8 +89,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       builder: (context, state) {
                         return AnimatedCategoryList(
                           categories: state.categories,
-                          categoryListDelayDuration: 100.ms,
-                          categoryListPlayDuration: 750.ms,
+                          categoryListDelayDuration: categoryAnimationDelay,
+                          categoryListPlayDuration: categoryAnimationDuration,
                           pickedCategory: state.currentCategory ?? const CategoryEntity('All'),
                           onCategoryPicked: (category) => dishesCubit.setCategory(category),
                         );
@@ -83,7 +100,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                     Expanded(
                       child: SingleChildScrollView(
                         controller: scrollController,
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: Paddings.mediumHorizontal,
                         scrollDirection: Axis.horizontal,
                         child: BlocConsumer<DishesCubit, DishesState>(
                           bloc: dishesCubit,
@@ -92,7 +109,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             final index = state.dishes.indexWhere((dish) => dish.category == state.currentCategory);
                             scrollController.animateTo(
                               index * (cardDishWidth + paddingBetweenCards),
-                              duration: 500.ms,
+                              duration: scrollAnimationDuration,
                               curve: Curves.easeInOut,
                             );
                           },
@@ -102,7 +119,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 state.dishes.length,
                                 (index) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(right: paddingBetweenCards),
+                                    padding: Paddings.mediumRight,
                                     child: DishCard(
                                       dish: state.dishes[index],
                                       scrollController: scrollController,
@@ -112,14 +129,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 },
                               )
                                   .animate(
-                                    delay: 1500.ms,
-                                    interval: 250.ms,
+                                    delay: dishCardAnimationDelay,
+                                    interval: dishCardAnimationInterval,
                                   )
-                                  .fadeIn(duration: 700.ms)
+                                  .fadeIn(
+                                    duration: dishCardAnimationDuration,
+                                  )
                                   .slideX(
                                     begin: 0.05,
                                     end: 0,
-                                    duration: 700.ms,
+                                    duration: dishCardAnimationDuration,
                                   ),
                             );
                           },
@@ -133,12 +152,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                     controller: animationOutController,
                   )
                   .fadeIn(
-                    duration: 750.ms,
+                    duration: exitAnimationDuration,
                   )
                   .slideY(
                     begin: -0.02,
                     end: 0,
-                    duration: 750.ms,
+                    duration: exitAnimationDuration,
                   ),
             ],
           ),
@@ -146,7 +165,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       ),
     );
   }
-
 
   @override
   void dispose() {
