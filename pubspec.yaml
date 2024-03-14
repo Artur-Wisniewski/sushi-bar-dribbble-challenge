@@ -28,14 +28,13 @@ dependencies:
   animated_segmented_tab_control: ^1.2.1
   hexagon: ^0.2.0
   modal_bottom_sheet: ^3.0.0
+  flutter_native_splash: ^2.3.10
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
-  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
@@ -72,8 +71,6 @@ flutter_intl:
   arb_dir: assets/l10n
   output_dir: lib/translations
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/logo.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
+flutter_native_splash:
+  background_image: "assets/images/waves_background.png"
+  color: "#2f358d"

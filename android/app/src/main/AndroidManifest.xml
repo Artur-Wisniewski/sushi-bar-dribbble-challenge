@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="dribbble_sushi_bar_challenge"
+        android:label="Sushi Bar"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
