@@ -21,12 +21,14 @@ class _AnimatedBottomBarItemState extends State<AnimatedBottomBarItem> with Tick
   bool isInitialised = false;
   final ValueNotifier<bool> _isActiveNotifier = ValueNotifier<bool>(false);
 
+  Duration get animationDuration => 300.ms;
+
   @override
   initState() {
     super.initState();
     _isActiveNotifier.value = widget.isActive;
     _controller = AnimationController(
-      duration: 300.ms,
+      duration: animationDuration,
       vsync: this,
     );
   }

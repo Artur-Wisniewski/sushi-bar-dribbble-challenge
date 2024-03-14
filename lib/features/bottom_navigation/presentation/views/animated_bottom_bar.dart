@@ -22,8 +22,20 @@ class AnimatedBottomBar extends StatefulWidget {
 class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTickerProviderStateMixin {
   late final AnimationController _fadeOutAnimationController = AnimationController(
     vsync: this,
-    duration: 500.ms,
+    duration: animationDuration,
   );
+
+  Duration get animationDuration => 500.ms;
+
+  Duration get changeItemDuration => 750.ms;
+
+  Duration get showItemInterval => 120.ms;
+
+  Duration get fadeInItemDuration => 450.ms;
+
+  Duration get fadeOutItemsDuration => 500.ms;
+
+  Duration get slideInItemDuration => 300.ms;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +61,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
                   : Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadii.circular,
             ),
-            duration: 500.ms,
+            duration: animationDuration,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -58,7 +70,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
                   iconPath: SvgImagesPaths.bowlChopsticks,
                   onTap: () {
                     context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.home);
-                    Future.delayed(750.ms, () => context.go(RoutesPaths.home));
+                    Future.delayed(changeItemDuration, () => context.go(RoutesPaths.home));
                   },
                 ),
                 AnimatedBottomBarItem(
@@ -74,7 +86,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
                         iconPath: SvgImagesPaths.cart,
                         onTap: () {
                           context.read<BottomBarNavigationCubit>().changeItem(BottomBarItems.cart);
-                          Future.delayed(750.ms, () => context.go(RoutesPaths.cart));
+                          Future.delayed(changeItemDuration, () => context.go(RoutesPaths.cart));
                         },
                       ),
                     );
@@ -86,15 +98,15 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
                 ),
               ]
                   .animate(
-                    interval: 120.ms,
+                    interval: showItemInterval,
                   )
                   .fadeIn(
-                    duration: 450.ms,
+                    duration: fadeInItemDuration,
                   )
                   .slideY(
                     begin: 0.7,
                     end: 0,
-                    duration: 300.ms,
+                    duration: slideInItemDuration,
                   ),
             )
                 .animate(
@@ -102,7 +114,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
                   autoPlay: false,
                 )
                 .fadeOut(
-                  duration: 500.ms,
+                  duration: fadeOutItemsDuration,
                 ),
           );
         },
