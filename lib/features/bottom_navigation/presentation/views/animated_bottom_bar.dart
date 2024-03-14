@@ -26,12 +26,6 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
   );
 
   @override
-  void dispose() {
-    _fadeOutAnimationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: Paddings.mediumAllBottomBig,
@@ -114,5 +108,11 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _fadeOutAnimationController.dispose();
+    super.dispose();
   }
 }

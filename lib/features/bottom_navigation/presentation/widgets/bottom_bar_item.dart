@@ -75,4 +75,10 @@ class _AnimatedBottomBarItemState extends State<AnimatedBottomBarItem> with Tick
       onPressed: widget.onTap,
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }

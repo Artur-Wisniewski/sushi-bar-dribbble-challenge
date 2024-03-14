@@ -24,12 +24,6 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
   late final AnimationController _exitAnimationController = AnimationController(vsync: this);
 
   @override
-  dispose() {
-    _exitAnimationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocListener<BottomBarNavigationCubit, BottomBarNavigationState>(
       listener: (context, state) {
@@ -95,5 +89,11 @@ class _CartViewState extends State<CartView> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  @override
+  dispose() {
+    _exitAnimationController.dispose();
+    super.dispose();
   }
 }

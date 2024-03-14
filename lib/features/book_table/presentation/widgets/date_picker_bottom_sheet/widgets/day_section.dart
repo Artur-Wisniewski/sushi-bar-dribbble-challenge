@@ -18,7 +18,7 @@ class DaySection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20), //TODO use paddings
           child: Text(
             L10n.current.day,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
@@ -34,7 +34,7 @@ class DaySection extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20), //TODO use paddings
                 children: List.generate(31, (index) {
                   final day = '${index + 1} ${L10n.current.decemberShort}';
                   bool isPicked = day == state.day;
@@ -50,11 +50,11 @@ class DaySection extends StatelessWidget {
                     onTap: () => bookTableCubit.pickDay(day),
                     child: AnimatedContainer(
                       duration: 200.ms,
-                      margin: const EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      margin: const EdgeInsets.only(right: 10), //TODO use paddings
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10), //TODO use paddings
                       decoration: BoxDecoration(
                         color: color,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20), //TODO use paddings
                       ),
                       child: AnimatedDefaultTextStyle(style: style, duration: 200.ms, child: Text(day)),
                     ),

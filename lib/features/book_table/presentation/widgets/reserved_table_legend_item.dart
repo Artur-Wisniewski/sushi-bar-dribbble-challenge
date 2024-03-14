@@ -21,7 +21,8 @@ class ReservedTableLegendItem extends StatelessWidget {
         const SizedBox(width: 8),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
+            //TODO: use theme
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),

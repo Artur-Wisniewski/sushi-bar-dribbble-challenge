@@ -11,7 +11,7 @@ class BottomSheetHandhold extends StatelessWidget {
         height: 5,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.grey[300],
+          color: Colors.grey[300], //TODO use theme
           borderRadius: BorderRadius.circular(40),
         ),
       ),

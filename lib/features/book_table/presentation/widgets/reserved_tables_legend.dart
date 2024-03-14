@@ -19,7 +19,7 @@ class ReservedTablesLegend extends StatelessWidget {
         children: [
           ReservedTableLegendItem(
             label: L10n.current.reserved,
-            color: const Color(0xFF404e9a),
+            color: const Color(0xFF404e9a), //TODO use theme
           ),
           const Gap(16),
           ReservedTableLegendItem(

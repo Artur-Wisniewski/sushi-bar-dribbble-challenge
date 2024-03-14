@@ -35,11 +35,6 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
 
   final BookTableCubit bookTableCubit = BookTableCubit();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void onPopInvoked() {
     context.read<BottomBarNavigationCubit>().markNavigateOutsideShell(false);
     context.pop();
@@ -60,12 +55,6 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
       ),
       builder: (context) => DatePickerBottomSheet(bookTableCubit: bookTableCubit),
     );
-  }
-
-  @override
-  void dispose() {
-    _blurAnimationController.dispose();
-    super.dispose();
   }
 
   @override
@@ -131,5 +120,12 @@ class _BookTableViewState extends State<BookTableView> with SingleTickerProvider
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _blurAnimationController.dispose();
+    bookTableCubit.close();
+    super.dispose();
   }
 }

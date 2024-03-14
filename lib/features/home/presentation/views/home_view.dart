@@ -17,6 +17,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
+  // TODO check all paddings in the app
+
   final DishesCubit dishesCubit = DishesCubit();
 
   late final AnimationController animationOutController;
@@ -38,15 +40,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     );
     appBarAnimationController.forward();
     dishesCubit.init();
-  }
-
-  @override
-  void dispose() {
-    // TODO check all dispose methods in the app
-    // TODO check all paddings in the app
-    animationOutController.dispose();
-    appBarAnimationController.dispose();
-    super.dispose();
   }
 
   @override
@@ -152,5 +145,15 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+
+  @override
+  void dispose() {
+    animationOutController.dispose();
+    appBarAnimationController.dispose();
+    scrollController.dispose();
+    dishesCubit.close();
+    super.dispose();
   }
 }

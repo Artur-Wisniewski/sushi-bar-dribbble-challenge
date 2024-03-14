@@ -18,12 +18,12 @@ class TimeSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0), //TODO use paddings
             child: Text(
               L10n.current.time,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
             )),
-        const Gap(12),
+        const Gap(12), //TODO use paddings
         BlocBuilder<BookTableCubit, BookTableState>(
           bloc: bookTableCubit,
           buildWhen: (previous, current) => previous.time != current.time,
@@ -33,7 +33,7 @@ class TimeSection extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20), //TODO use paddings
                 children: List.generate(20, (index) {
                   final time = DateTime(0, 0, 0, 12).add(const Duration(minutes: 30) * index);
                   final timeText =
@@ -51,11 +51,11 @@ class TimeSection extends StatelessWidget {
                     onTap: () => bookTableCubit.pickTime(timeText),
                     child: AnimatedContainer(
                       duration: 200.ms,
-                      margin: const EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      margin: const EdgeInsets.only(right: 10), //TODO use paddings
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10), //TODO use paddings
                       decoration: BoxDecoration(
                         color: color,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20), //TODO use paddings
                       ),
                       child: AnimatedDefaultTextStyle(style: style, duration: 200.ms, child: Text(timeText)),
                     ),

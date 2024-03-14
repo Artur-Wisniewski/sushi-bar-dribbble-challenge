@@ -29,15 +29,15 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> with Sing
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Gap(10),
+        const Gap(10), //TODO use paddings
         const BottomSheetHandhold(),
-        const Gap(24),
+        const Gap(24), //TODO use paddings
         NumberOfGuestsSection(bookTableCubit: widget.bookTableCubit),
-        const Gap(24),
+        const Gap(24), //TODO use paddings
         DaySection(bookTableCubit: widget.bookTableCubit),
-        const Gap(24),
+        const Gap(24), //TODO use paddings
         TimeSection(bookTableCubit: widget.bookTableCubit),
-        const Gap(24),
+        const Gap(24), //TODO use paddings
         Padding(
           padding: const EdgeInsets.all(24.0),
           child: AnimatedBottomButton(

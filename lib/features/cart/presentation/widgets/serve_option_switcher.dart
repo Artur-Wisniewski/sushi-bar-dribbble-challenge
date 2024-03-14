@@ -41,12 +41,6 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
   }
 
   @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SegmentedTabControl(
       controller: _tabController,
@@ -88,5 +82,11 @@ class _ServeOptionSwitcherState extends State<ServeOptionSwitcher> with SingleTi
         .fadeOut(
           duration: 750.ms,
         );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 }
