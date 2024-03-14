@@ -1,3 +1,4 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/bottom_navigation/presentation/manager/bottom_bar_navigation_cubit.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/category.dart';
@@ -8,7 +9,6 @@ import 'package:dribbble_sushi_bar_challenge/features/home/presentation/widgets/
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -73,7 +73,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         child: SafeArea(
           child: Column(
             children: [
-              const Gap(16), //TODO
+              Gaps.medium,
               Padding(
                 padding: Paddings.mediumHorizontal,
                 child: AnimatedAppBar(
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         );
                       },
                     ),
-                    const Gap(16),
+                    Gaps.medium,
                     Expanded(
                       child: SingleChildScrollView(
                         controller: scrollController,
