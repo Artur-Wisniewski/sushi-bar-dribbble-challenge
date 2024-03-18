@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RoutesPaths {
-  static const home = 'home';
-  static const cart = 'cart';
+  static const home = '/home';
+  static const cart = '/cart';
   static const bookTable = '$cart/book-table';
   static const start = '/';
 }
