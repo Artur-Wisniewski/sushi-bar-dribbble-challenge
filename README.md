@@ -1,16 +1,24 @@
-# dribbble_sushi_bar_challenge
+# Description 📃
 
-Dribbble sushi bar challenge
+A demonstration application based on a project found on the dribbble platform to show how simple it is to make beautiful animations using Flutter.
 
-## Getting Started
+## App Preview 🎬
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Dribbble Design
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[link](https://dribbble.com/shots/20957120-Japanese-restaurant-app)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies 🛠
+
+| Description      | Package                                                                                                                          |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| Architecture     | [Reference Architecture](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure) |
+| State Management | [Bloc](https://pub.dev/packages/bloc)                                                                                            
+| Animations       | [flutter_animate](https://pub.dev/packages/flutter_animate), [Rive](https://pub.dev/packages/rive), explicit animation           |
+| Navigation       | [go_router](https://pub.dev/packages/go_router)                                                                                  |
+| Preview          | [device_preview](https://pub.dev/packages/device_preview)                                                                        |
+
+## License
+
+MIT License
