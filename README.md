@@ -5,7 +5,7 @@ A demonstration application based on a project found on the dribbble platform to
 ## App Preview 🎬
 
 
-## Dribbble Design
+## Dribbble Design 🎨
 
 [link](https://dribbble.com/shots/20957120-Japanese-restaurant-app)
 
@@ -19,6 +19,6 @@ A demonstration application based on a project found on the dribbble platform to
 | Navigation       | [go_router](https://pub.dev/packages/go_router)                                                                                  |
 | Preview          | [device_preview](https://pub.dev/packages/device_preview)                                                                        |
 
-## License
+## License 📜
 
 MIT License
