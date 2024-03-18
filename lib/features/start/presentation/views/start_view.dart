@@ -72,6 +72,15 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
     super.didChangeDependencies();
   }
 
+  void _onBottomButtonPressed() {
+    _titleController.forward();
+    _noodlesController.forward();
+    Future.delayed(
+      buttonAnimationDelay,
+      () => context.pushReplacement(RoutesPaths.home),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,14 +157,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
         padding: Paddings.mediumAllBottomBig,
         child: AnimatedBottomButton(
           delay: buttonDelay,
-          onPressed: () {
-            _titleController.forward();
-            _noodlesController.forward();
-            Future.delayed(
-              buttonAnimationDelay,
-              () => context.go(RoutesPaths.home),
-            );
-          },
+          onPressed: _onBottomButtonPressed,
         ),
       ),
     );

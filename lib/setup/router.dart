@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RoutesPaths {
-  static const home = '/home';
-  static const cart = '/cart';
+  static const home = 'home';
+  static const cart = 'cart';
   static const bookTable = '$cart/book-table';
   static const start = '/';
 }
@@ -25,8 +25,9 @@ final router = GoRouter(
       ),
     ),
     ShellRoute(
-      builder: (BuildContext context, GoRouterState state, Widget child) {
-        return Scaffold(
+      pageBuilder: (BuildContext context, GoRouterState state, Widget child) => NoTransitionPage<void>(
+        key: state.pageKey,
+        child: Scaffold(
           extendBody: true,
           body: Container(
             decoration: const BoxDecoration(
@@ -39,8 +40,8 @@ final router = GoRouter(
             child: child,
           ),
           bottomNavigationBar: const AnimatedBottomBar(),
-        );
-      },
+        ),
+      ),
       routes: [
         GoRoute(
           path: RoutesPaths.home,
