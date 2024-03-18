@@ -25,7 +25,6 @@ class DishesCubit extends Cubit<DishesState> {
       currentCategory: categories.first,
       categories: categories,
     ));
-    print('Categories: $categories');
   }
 
   void setCategory(CategoryEntity category) {
