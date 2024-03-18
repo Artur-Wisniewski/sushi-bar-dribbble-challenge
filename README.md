@@ -4,6 +4,7 @@ A demonstration application based on a project found on the dribbble platform to
 
 ## App Preview 🎬
 
+https://github.com/Artur-Wisniewski/sushi-bar-dribbble-challenge/assets/46329000/42702734-ef8f-4506-85c8-a4de1bfca2b5
 
 ## Dribbble Design 🎨
 
