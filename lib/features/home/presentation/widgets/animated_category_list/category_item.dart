@@ -6,14 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem(
-      {super.key, required this.category, required this.isCategoryPicked, required this.onCategoryPicked});
+  const CategoryItem({
+    super.key,
+    required this.category,
+    required this.isCategoryPicked,
+    required this.onCategoryPicked,
+  });
 
   final CategoryEntity category;
   final bool isCategoryPicked;
   final Function(CategoryEntity) onCategoryPicked;
 
   Duration get categoryTextAnimationDuration => 300.ms;
+
+  TextStyle _getCategoryTextStyle(BuildContext context, bool isCategoryPicked) {
+    return isCategoryPicked
+        ? Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
+              fontWeight: FontWeight.bold,
+            )
+        : Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onSecondary,
+              fontWeight: FontWeight.bold,
+            );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +48,5 @@ class CategoryItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  TextStyle _getCategoryTextStyle(BuildContext context, bool isCategoryPicked) {
-    return isCategoryPicked
-        ? Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSecondaryContainer,
-              fontWeight: FontWeight.bold,
-            )
-        : Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.onSecondary,
-              fontWeight: FontWeight.bold,
-            );
   }
 }
