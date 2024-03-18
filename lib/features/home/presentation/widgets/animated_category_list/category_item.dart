@@ -1,3 +1,6 @@
+import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
+import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
+import 'package:dribbble_sushi_bar_challenge/core/widgets/springy_button.dart';
 import 'package:dribbble_sushi_bar_challenge/features/home/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -14,13 +17,13 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onCategoryPicked(category),
+    return SpringyButton(
+      onPressed: () => onCategoryPicked(category),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: Paddings.mediumHorizontalSmallVertical,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadii.medium,
         ),
         child: AnimatedDefaultTextStyle(
           style: _getCategoryTextStyle(context, isCategoryPicked),

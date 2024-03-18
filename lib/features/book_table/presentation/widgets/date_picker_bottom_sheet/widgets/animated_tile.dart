@@ -1,5 +1,6 @@
 import 'package:dribbble_sushi_bar_challenge/core/constants/border_radiuses.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
+import 'package:dribbble_sushi_bar_challenge/core/widgets/springy_button.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedTile extends StatelessWidget {
@@ -31,8 +32,8 @@ class AnimatedTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
+    return SpringyButton(
+      onPressed: onTap,
       child: AnimatedContainer(
         duration: animationDuration,
         margin: Paddings.smallRight,

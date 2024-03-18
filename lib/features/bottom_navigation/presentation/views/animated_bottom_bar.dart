@@ -37,8 +37,6 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
 
   Duration get slideInItemDuration => 500.ms;
 
-  Duration get showAnimationDelay => 200.ms;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -100,7 +98,6 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> with SingleTicker
                 ),
               ]
                   .animate(
-                    delay: showAnimationDelay,
                     interval: showItemInterval,
                   )
                   .fadeIn(
