@@ -53,7 +53,7 @@ class _StartViewState extends State<StartView> with TickerProviderStateMixin {
 
   Duration get japaneseTitleDelay => englishTitleDelay + 600.ms;
 
-  Duration get buttonDelay => japaneseTitleDelay + japaneseLettersInterval * 4 + japaneseLetterAnimationDuration;
+  Duration get buttonDelay => japaneseTitleDelay + japaneseLettersInterval * 3 + japaneseLetterAnimationDuration;
 
   Duration get japaneseLettersInterval => 140.ms;
 

@@ -27,6 +27,8 @@ class AnimatedBottomButton extends StatefulWidget {
 class _AnimatedBottomButtonState extends State<AnimatedBottomButton> {
   late bool _isEnabled = widget.isEnabled;
 
+  Duration get fadeInDuration => 150.ms;
+
   @override
   void didUpdateWidget(covariant AnimatedBottomButton oldWidget) {
     if (oldWidget.isEnabled != widget.isEnabled) {
@@ -41,7 +43,9 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> {
   Widget build(BuildContext context) {
     return SpringyButton(
       onPressed: () {
-        if (_isEnabled) widget.onPressed!.call();
+        if (_isEnabled) {
+          widget.onPressed!.call();
+        }
       },
       child: AnimatedContainer(
         alignment: Alignment.center,
@@ -53,12 +57,13 @@ class _AnimatedBottomButtonState extends State<AnimatedBottomButton> {
         ),
         duration: widget.changeColorDuration,
         child: AnimatedDefaultTextStyle(
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: _isEnabled ? Theme.of(context).colorScheme.secondary : AppColors.greyMedium,
-              ),
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge!
+              .copyWith(color: _isEnabled ? Theme.of(context).colorScheme.secondary : AppColors.greyMedium),
           duration: widget.changeColorDuration,
           child: Text(widget.label),
-        ).animate().fadeIn(duration: 150.ms),
+        ).animate().fadeIn(duration: fadeInDuration),
       ),
     );
   }

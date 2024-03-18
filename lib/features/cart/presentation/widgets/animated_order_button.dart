@@ -47,15 +47,10 @@ class _AnimatedOrderButtonState extends State<AnimatedOrderButton> with TickerPr
     }
   }
 
-  void onTap() {
-    _entryAnimationController.reverse();
-    widget.onTap();
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
         alignment: Alignment.center,
         height: Sizes.bottomBarHeight,

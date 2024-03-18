@@ -1,9 +1,9 @@
 import 'package:dribbble_sushi_bar_challenge/core/constants/gaps.dart';
 import 'package:dribbble_sushi_bar_challenge/core/constants/paddings.dart';
 import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/manager/book_table_cubit.dart';
+import 'package:dribbble_sushi_bar_challenge/features/book_table/presentation/widgets/date_picker_bottom_sheet/widgets/animated_tile.dart';
 import 'package:dribbble_sushi_bar_challenge/translations/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DaySection extends StatelessWidget {
@@ -12,6 +12,10 @@ class DaySection extends StatelessWidget {
   final Duration switchAnimationDuration;
 
   final BookTableCubit bookTableCubit;
+
+  String getDayByIndex(int index) {
+    return '${index + 1} ${L10n.current.decemberShort}';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +43,13 @@ class DaySection extends StatelessWidget {
                 shrinkWrap: true,
                 padding: Paddings.mediumHorizontal,
                 children: List.generate(31, (index) {
-                  final day = '${index + 1} ${L10n.current.decemberShort}';
+                  final day = getDayByIndex(index);
                   bool isPicked = day == state.day;
-                  Color color = isPicked
-                      ? Theme.of(context).scaffoldBackgroundColor
-                      : Theme.of(context).colorScheme.secondaryContainer;
-                  TextStyle style = isPicked
-                      ? Theme.of(context).textTheme.titleSmall!
-                      : Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.onSecondaryContainer,
-                          );
-                  return GestureDetector(
+                  return AnimatedTile(
+                    animationDuration: switchAnimationDuration,
+                    isPicked: isPicked,
                     onTap: () => bookTableCubit.pickDay(day),
-                    child: AnimatedContainer(
-                      duration: switchAnimationDuration,
-                      margin: const EdgeInsets.only(right: 10), //TODO use paddings
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10), //TODO use paddings
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(20), //TODO use paddings
-                      ),
-                      child: AnimatedDefaultTextStyle(style: style, duration: 200.ms, child: Text(day)),
-                    ),
+                    text: day,
                   );
                 }),
               ),

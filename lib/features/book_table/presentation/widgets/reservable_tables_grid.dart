@@ -95,7 +95,7 @@ class _ReservableTablesGridState extends State<ReservableTablesGrid> {
                       ),
                     )
                         .animate(
-                          delay: 300.ms + 80.ms * getIndexByRowAndCol(row, col),
+                          delay: 400.ms + 80.ms * getIndexByRowAndCol(row, col),
                         )
                         .fadeIn(
                           duration: 150.ms,
